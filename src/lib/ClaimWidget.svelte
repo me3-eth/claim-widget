@@ -38,7 +38,6 @@
   function claim () {
     if (nameHasError) {
       highlightNameError = true
-      console.log('no value')
       return
     }
 
@@ -51,13 +50,13 @@
   }
 
   async function connectWallet (ev) {
-    connected = true
-
     tokens = (await nftApi()).map(nft => ({
       url: nft.metadata.image,
       tokenId: nft.id.tokenId,
       title: nft.metadata.description
     }))
+
+    connected = true
   }
 
   async function nftApi () {
@@ -71,16 +70,11 @@
       throw new Error('Unable to load NFTs')
     }
 
-    console.log({ response })
-
     const data = await response.json()
 
-    console.log({ data })
     const owned = data.ownedNfts
       .filter(nft => nft.contract.address.toLowerCase() === contractAddress.toLowerCase())
       .map(nft => nft.id.tokenId)
-
-    console.log({ owned, contractAddress })
 
     return Promise.all(
       owned.map(tokenId => {

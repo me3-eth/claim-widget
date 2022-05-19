@@ -26,7 +26,7 @@
         highlight={token.tokenId === highlightToken}
         />
     </li>
-{/each}
+  {/each}
 </ul>
 
 <style>
