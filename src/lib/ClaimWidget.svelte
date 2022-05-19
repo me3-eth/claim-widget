@@ -7,8 +7,10 @@
   export let nameLabel = 'Name'
   export let tokenLabel = 'Token'
   export let namePlaceholder = 'register-me'
+  export let alchemyApiKey
+  export let contractAddress
 
-  let sampleData = []
+  let tokens = []
 
   let nameField
   let selectedToken
@@ -18,6 +20,10 @@
   let nameHasError
   let highlightNameError = false
   let tokenError = false
+
+  let connectedWallet = {
+    address: '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc'
+  }
 
   let nameValidations = [
     s => (/[a-z0-9]*/gi).test(s),
@@ -44,28 +50,54 @@
     claimed = true
   }
 
-  function connectWallet (ev) {
+  async function connectWallet (ev) {
     connected = true
-  sampleData = [
-    {
-      id: {
-        tokenId: '5527'
-      },
-      title: 'Runner #5527',
-      metadata: {
-        image: 'https://img.chainrunners.xyz/api/v1/tokens/png/5527'
-      }
-    },
-    {
-      id: {
-        tokenId: '5528'
-      },
-      title: 'Runner #5528',
-      metadata: {
-        image: 'https://img.chainrunners.xyz/api/v1/tokens/png/5528'
-      }
-    },
-  ]
+
+    tokens = (await nftApi()).map(nft => ({
+      url: nft.metadata.image,
+      tokenId: nft.id.tokenId,
+      title: nft.metadata.description
+    }))
+  }
+
+  async function nftApi () {
+    const options = { mode: 'cors', method: 'GET', redirect: 'follow' }
+
+    const searchParams = new URLSearchParams({
+      owner: connectedWallet.address
+    })
+    const response = await fetch(`https://eth-mainnet.alchemyapi.io/v2/${alchemyApiKey}/getNFTs?${searchParams.toString()}`, options)
+    if (!response.statusCode == 200) {
+      throw new Error('Unable to load NFTs')
+    }
+
+    console.log({ response })
+
+    const data = await response.json()
+
+    console.log({ data })
+    const owned = data.ownedNfts
+      .filter(nft => nft.contract.address.toLowerCase() === contractAddress.toLowerCase())
+      .map(nft => nft.id.tokenId)
+
+    console.log({ owned, contractAddress })
+
+    return Promise.all(
+      owned.map(tokenId => {
+        const searchParams = new URLSearchParams({
+          contractAddress,
+          tokenId 
+        })
+        return fetch(`https://eth-mainnet.alchemyapi.io/v2/${alchemyApiKey}/getNFTMetadata?${searchParams.toString()}`, options)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Unable to get metadata')
+            }
+
+            return response.json()
+          })
+      })
+    )
   }
 
 </script>
@@ -93,7 +125,7 @@
 
       <br />
       <label class:tokenError>{tokenLabel}:</label>
-      <TokenSelector on:tokenSelected={selectToken} tokens={sampleData} />
+      <TokenSelector on:tokenSelected={selectToken} {tokens} />
     </div>
     <button class="main-btn" on:click={claim}>{claimButtonText}</button>
   </section>

@@ -20,10 +20,10 @@
   {#each tokens as token (token.title)}
     <li>
       <Image
-        on:click={selectToken(token.id.tokenId)}
+        on:click={selectToken(token.tokenId)}
         alt={token.title}
-        src={token.metadata.image}
-        highlight={token.id.tokenId === highlightToken}
+        src={token.url}
+        highlight={token.tokenId === highlightToken}
         />
     </li>
 {/each}
