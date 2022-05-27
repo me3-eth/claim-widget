@@ -9,6 +9,7 @@
   export let namePlaceholder = 'register-me'
   export let alchemyApiKey
   export let contractAddress
+  export let provider
 
   let tokens = []
 
