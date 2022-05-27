@@ -60,16 +60,6 @@
     claimed = true
   }
 
-  async function connectWallet (ev) {
-    tokens = (await nftApi()).map(nft => ({
-      url: nft.metadata.image,
-      tokenId: nft.id.tokenId,
-      title: nft.metadata.description
-    }))
-
-    connected = true
-  }
-
   async function nftApi () {
     const options = { mode: 'cors', method: 'GET', redirect: 'follow' }
 
