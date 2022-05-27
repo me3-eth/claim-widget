@@ -3,11 +3,13 @@
   import TokenSelector from './TokenSelector.svelte'
   import Input from './Input.svelte'
 
+  // Text
   export let title = 'Claim subdomain'
   export let claimButtonText = 'Claim'
   export let nameLabel = 'Name'
   export let tokenLabel = 'Token'
   export let namePlaceholder = 'register-me'
+
   export let domain
   export let alchemyApi = { key: '', env: '' }
   export let tokenContractAddress
@@ -115,6 +117,7 @@
 
   <div>
     <Input
+      {domain}
       placeholder={namePlaceholder}
       label={nameLabel}
       bind:value={nameField}
@@ -188,6 +191,7 @@
   color: red;
 }
 
+  /*
   .lesser-btn {
     --gradient-lesser-button: linear-gradient(257.35deg, #FFFFFF 0%, rgba(255, 255, 255, 0.25) 100%);
 
@@ -207,6 +211,7 @@
   .lesser-btn:hover {
     box-shadow: 0px 6px 30px rgba(108, 108, 128, 0.06);
   }
+  */
 
   .main-btn,
   .main-btn:disabled {
@@ -215,22 +220,21 @@
     justify-content: center;
     align-items: center;
 
-    height: var(--primaryBtnHeight, 64px);
-    width: var(--primaryBtnWidth, 196px);
+    height: var(--me3-claimbtn-height, 64px);
+    width: var(--me3-claimbtn-width, 196px);
     margin: 0;
 
-    background-color: #637fff;
-    background: linear-gradient(256.24deg, #3D73FF -30.68%, rgba(121, 174, 255, 0.8) 23.64%, rgba(145, 142, 255, 0.75) 63.28%, rgba(87, 122, 255, 0.35) 97.37%);
-    box-shadow: 0px 6px 60px rgba(134, 158, 255, 0.5);
+    background: var(---me3-claimbtn-background, linear-gradient(256.24deg, #3D73FF -30.68%, rgba(121, 174, 255, 0.8) 23.64%, rgba(145, 142, 255, 0.75) 63.28%, rgba(87, 122, 255, 0.35) 97.37%));
+    box-shadow: var(--me3-claimbtn-box-shadow, 0px 6px 60px rgba(134, 158, 255, 0.5));
 
     font-weight: 600;
     font-size: 18px;
     line-height: 23px;
     text-align: center;
-    color: #ffffff;
+    color: var(--me3-claimbtn-text-color, #ffffff);
 
-    border-radius: 24px;
-    border: none;
+    border-radius: var(--me3-claimbtn-border-radius, 24px);
+    border: var(--me3-claimbtn-border, none);
   }
 
   .main-btn::before,
