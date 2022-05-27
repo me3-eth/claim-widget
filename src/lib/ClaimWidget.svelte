@@ -1,4 +1,5 @@
 <script>
+  import { ethers } from 'ethers'
   import TokenSelector from './TokenSelector.svelte'
   import Input from './Input.svelte'
 
@@ -7,9 +8,16 @@
   export let nameLabel = 'Name'
   export let tokenLabel = 'Token'
   export let namePlaceholder = 'register-me'
-  export let alchemyApiKey
-  export let contractAddress
+  export let domain
+  export let alchemyApi = { key: '', env: '' }
+  export let tokenContractAddress
   export let provider
+  export let me3 = { authoriser: '', rules: '' }
+
+  // Section visibility
+  export let showTokenSelector = true
+  export let showDescription = true
+  export let showClaimButton = true
 
   let tokens = []
 
@@ -66,7 +74,7 @@
     const searchParams = new URLSearchParams({
       owner: connectedWallet.address
     })
-    const response = await fetch(`https://eth-mainnet.alchemyapi.io/v2/${alchemyApiKey}/getNFTs?${searchParams.toString()}`, options)
+    const response = await fetch(`https://eth-${alchemyApi.env}.alchemyapi.io/v2/${alchemyApi.key}/getNFTs?${searchParams.toString()}`, options)
     if (!response.statusCode == 200) {
       throw new Error('Unable to load NFTs')
     }
@@ -74,16 +82,16 @@
     const data = await response.json()
 
     const owned = data.ownedNfts
-      .filter(nft => nft.contract.address.toLowerCase() === contractAddress.toLowerCase())
+      .filter(nft => nft.contract.address.toLowerCase() === tokenContractAddress.toLowerCase())
       .map(nft => nft.id.tokenId)
 
     return Promise.all(
       owned.map(tokenId => {
         const searchParams = new URLSearchParams({
-          contractAddress,
+          contractAddress: tokenContractAddress,
           tokenId 
         })
-        return fetch(`https://eth-mainnet.alchemyapi.io/v2/${alchemyApiKey}/getNFTMetadata?${searchParams.toString()}`, options)
+        return fetch(`https://eth-${alchemyApi.env}.alchemyapi.io/v2/${alchemyApi.key}/getNFTMetadata?${searchParams.toString()}`, options)
           .then(response => {
             if (!response.ok) {
               throw new Error('Unable to get metadata')
@@ -97,37 +105,36 @@
 
 </script>
 
-{#if !claimed}
-  <section>
-    <div class="header">
-      <h1>{title}</h1>
-      {#if connected}
-        <p>Connected!</p>
-      {:else}
-        <button on:click={connectWallet} class="lesser-btn">Connect</button>
-      {/if}
-    </div>
+<div id="container">
+  {#if showDescription}
+    <header>
+      <h2>Register Your Subdomain</h2>
+      <p>Choose your subdomain for {domain} and assign it to one of your NFTs. You'll also get a profile.</p>
+    </header>
+  {/if}
 
-    <div>
-      <Input
-        placeholder={namePlaceholder}
-        label={nameLabel}
-        bind:value={nameField}
-        bind:hasError={nameHasError}
-        highlightError={highlightNameError}
-        validations={nameValidations}
-        />
+  <div>
+    <Input
+      placeholder={namePlaceholder}
+      label={nameLabel}
+      bind:value={nameField}
+      bind:hasError={nameHasError}
+      highlightError={highlightNameError}
+      validations={nameValidations}
+      />
 
+
+    {#if showTokenSelector}
       <br />
       <label class:tokenError>{tokenLabel}:</label>
       <TokenSelector on:tokenSelected={selectToken} {tokens} />
-    </div>
-    <button class="main-btn" on:click={claim}>{claimButtonText}</button>
-  </section>
+    {/if}
+  </div>
 
-{:else}
-  <p>profile go here</p>
-{/if}
+  {#if showClaimButton}
+    <button class="main-btn" on:click={claim}>{claimButtonText}</button>
+  {/if}
+</div>
 
 <style>
   section {
@@ -143,24 +150,43 @@
     gap: 32px;
   }
 
-  h1 {
-    margin: 0;
+  #container {
+    background: var(--me3-container-background, --gradient-background-card);
+    padding: var(--me3-container-padding, 30px 20px);
+    border-radius: var(--me3-container-border-radius, 40px);
+    box-shadow: var(--me3-container-box-shadow, 0px 6px 30px rgba(108, 108, 128, 0.06));
+    width: 100%;
   }
 
-  div {
+  #container header {
     width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: var(--header-height);
+  }
+
+  header h2 {
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 35px;
+    color: var(--me3-text-color, #1C1C33);
+  }
+
+  header p {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    margin: 0;
+    margin-top: 12px;
+    color: var(--color-text-secondary);
   }
 
 .tokenError {
   color: red;
 }
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
 
   .lesser-btn {
     --gradient-lesser-button: linear-gradient(257.35deg, #FFFFFF 0%, rgba(255, 255, 255, 0.25) 100%);
