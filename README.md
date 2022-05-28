@@ -39,9 +39,10 @@ _Writing documentation before code is actually available. Check demo code to see
   --me3-text-color: #1C1C33;
 
   --me3-container-border-radius: 40px;
-  --me3-container-padding: 30px 20px;
-  --me3-container-background: #ffffff;
+  --me3-container-padding: 40px 30px;
+  --me3-container-background: linear-gradient(257.35deg, #FFFFFF 0%, rgba(255, 255, 255, 0.25) 100%);
   --me3-container-box-shadow: 0px 6px 30px rgba(108, 108, 128, 0.06);
+  --me3-container-item-gap: 32px;
 
   --me3-claimbtn-height: 64px;
   --me3-claimbtn-width: 196px;
@@ -51,9 +52,16 @@ _Writing documentation before code is actually available. Check demo code to see
   --me3-claimbtn-border-radius: 24px;
   --me3-claimbtn-border: none;
 
-  --me3-input-border-radius: 8px;
+  --me3-input-border-radius: 16px;
   --me3-input-border: 1px solid #dedede;
-  --me3-input-padding: 8px;
-  --me3-input-margin: 8px;
+  --me3-input-padding: 16px;
+  --me3-input-margin: 0px;
+  --me3-input-background: #ffffff;
+  
+  --me3-label-margin: 0 0 8px 0;
+  --me3-label-font-size: 14px;
+  --me3-label-line-height: 24px;
+  --me3-label-font-weight: 500;
+  --me3-label-display: block;
 }
 ```

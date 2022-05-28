@@ -19,7 +19,7 @@
   }
 </script>
 
-<label for={id}>{label}:</label>
+<label for={id}>{label}</label>
 
 <div class="fake-input" class:error={highlightError}>
   <input
@@ -39,10 +39,18 @@
     border: 1px solid red;
   }
 
+  label {
+    display: var(--me3-label-display, block);
+    margin: var(--me3-label-margin, 0 0 8px 0);
+    font-size: var(--me3-label-font-size, 14px);
+    line-height: var(--me3-label-line-height, 24px);
+    font-weight: var(--me3-label-font-weight, 500);
+  }
+
   input {
     border: 0;
     text-align: right;
-    outline: 0;
+    outline: none;
     width: 100%;
     background: transparent;
     color: var(--me3-input-text-color, #1c1c33);
@@ -55,9 +63,10 @@
     flex-direction: row;
     align-items: center;
 
-    border-radius: var(--me3-input-border-radius, 8px);
+    border-radius: var(--me3-input-border-radius, 16px);
     border: var(--me3-input-border, 1px solid #dedede);
-    padding: var(--me3-input-padding, 8px);
-    margin: var(--me3-input-margin, 8px);
+    padding: var(--me3-input-padding, 16px);
+    margin: var(--me3-input-margin, 0);
+    background: var(--me3-input-background, #ffffff);
   }
 </style>

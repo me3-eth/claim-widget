@@ -4,6 +4,8 @@
 
   export let tokens = []
 
+  $: console.log({ tokens })
+
   const dispatch = createEventDispatcher()
 
   let highlightToken = ''
@@ -20,10 +22,11 @@
   {#each tokens as token (token.title)}
     <li>
       <Image
-        on:click={selectToken(token.tokenId)}
+        on:click={selectToken(token.id.tokenId)}
         alt={token.title}
-        src={token.url}
-        highlight={token.tokenId === highlightToken}
+        src={token.media[0].gateway}
+        label="#{parseInt(token.id.tokenId)}"
+        highlight={token.id.tokenId === highlightToken}
         />
     </li>
   {/each}
@@ -39,6 +42,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
   }
 </style>

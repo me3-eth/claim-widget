@@ -15,20 +15,24 @@
 <Meta title="Claim Widget" component={ClaimWidget} />
 
 <Story name="Default">
-  <ClaimWidget
-    tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
-    domain="me3.eth"
-    provider={global.ethereum}
-    alchemyApi={{ key: 'hP76qJi6xsXDNJIxJxEWuDj6XkasUraf', env: 'mainnet' }}
-    />
+  <div style="width: 420px;">
+    <ClaimWidget
+      tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
+      domain="me3.eth"
+      provider={global.ethereum}
+      alchemyApi={{ key: 'hP76qJi6xsXDNJIxJxEWuDj6XkasUraf', env: 'mainnet' }}
+      />
+  </div>
 </Story>
 
 <Story name="For new token mints">
-  <ClaimWidget
-    tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
-    domain="me3.eth"
-    showTokenSelector={false}
-    showDescription={false}
-    showClaimButton={false}
-    />
+  <div style="width: 420px;">
+    <ClaimWidget
+      tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
+      domain="me3.eth"
+      showTokenSelector={false}
+      showDescription={false}
+      showClaimButton={false}
+      />
+  </div>
 </Story>

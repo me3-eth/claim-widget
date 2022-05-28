@@ -86,7 +86,7 @@
     </header>
   {/if}
 
-  <div>
+  <section>
     <Input
       {domain}
       placeholder={namePlaceholder}
@@ -96,14 +96,15 @@
       highlightError={highlightNameError}
       validations={nameValidations}
       />
+  </section>
 
 
-    {#if showTokenSelector}
-      <br />
+  {#if showTokenSelector}
+    <section>
       <label class:tokenError>{tokenLabel}</label>
       <TokenSelector on:tokenSelected={selectToken} {tokens} />
-    {/if}
-  </div>
+    </section>
+  {/if}
 
   {#if showClaimButton}
     <button class="main-btn" on:click={claim}>{claimButtonText}</button>
@@ -111,22 +112,14 @@
 </div>
 
 <style>
-  section {
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0px 6px 30px rgba(108, 108, 128, 0.06);
-    padding: 16px;
-
+  #container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    gap: 32px;
-  }
+    gap: var(--me3-container-item-gap, 32px);
 
-  #container {
-    background: var(--me3-container-background, --gradient-background-card);
-    padding: var(--me3-container-padding, 30px 20px);
+    background: var(--me3-container-background, linear-gradient(257.35deg, #FFFFFF 0%, rgba(255, 255, 255, 0.25) 100%));
+    padding: var(--me3-container-padding, 40px 30px);
     border-radius: var(--me3-container-border-radius, 40px);
     box-shadow: var(--me3-container-box-shadow, 0px 6px 30px rgba(108, 108, 128, 0.06));
     width: 100%;
@@ -146,16 +139,21 @@
     font-weight: 600;
     font-size: 28px;
     line-height: 35px;
-    color: var(--me3-text-color, #1C1C33);
+    color: var(--me3-title-color, #1c1c33);
   }
 
   header p {
     font-size: 16px;
     line-height: 24px;
     text-align: center;
+    font-weight: 400;
     margin: 0;
     margin-top: 12px;
-    color: var(--color-text-secondary);
+    color: var(--me3-description-color, #828499);
+  }
+
+  section {
+    width: 100%;
   }
 
 .tokenError {
@@ -183,6 +181,14 @@
     box-shadow: 0px 6px 30px rgba(108, 108, 128, 0.06);
   }
   */
+
+  label {
+    display: var(--me3-label-display, block);
+    margin: var(--me3-label-margin, 0 0 8px 0);
+    font-size: var(--me3-label-font-size, 14px);
+    line-height: var(--me3-label-line-height, 24px);
+    font-weight: var(--me3-label-font-weight, 500);
+  }
 
   .main-btn,
   .main-btn:disabled {
