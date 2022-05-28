@@ -12,9 +12,17 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "start-storybook -p 6006"
   },
   "devDependencies": {
+    "@depay/web3-blockchains": "^4.5.1",
+    "@depay/web3-mock": "^11.8.1",
+    "@storybook/addon-actions": "^6.5.5",
+    "@storybook/addon-links": "^6.5.5",
+    "@storybook/addon-svelte-csf": "^2.0.4",
+    "@storybook/addons": "^6.5.5",
+    "@storybook/svelte": "^6.5.5",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
     "vite": "^2.9.9"
   },

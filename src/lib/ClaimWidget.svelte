@@ -1,7 +1,9 @@
 <script>
+  import { writable } from 'svelte/store'
   import { ethers } from 'ethers'
   import TokenSelector from './TokenSelector.svelte'
   import Input from './Input.svelte'
+  import { nftApi } from './me3-protocol'
 
   // Text
   export let title = 'Claim subdomain'
@@ -14,7 +16,6 @@
   export let alchemyApi = { key: '', env: '' }
   export let tokenContractAddress
   export let provider
-  export let me3 = { authoriser: '', rules: '' }
 
   // Section visibility
   export let showTokenSelector = true
@@ -22,6 +23,25 @@
   export let showClaimButton = true
 
   let tokens = []
+
+  let signer
+  let providerStore = writable(null)
+  providerStore.subscribe(async p => {
+    if (!p) return
+
+    signer = p.getSigner()
+
+    console.log({ signer })
+
+    const addr = await signer.getAddress()
+    tokens = await nftApi(tokenContractAddress, addr, { alchemyApi })
+    console.log({ tokens })
+  })
+
+  $: {
+    if (provider) { providerStore.set(new ethers.providers.Web3Provider(provider)) }
+    console.log({ provider })
+  }
 
   let nameField
   let selectedToken
@@ -59,42 +79,6 @@
 
     claimed = true
   }
-
-  async function nftApi () {
-    const options = { mode: 'cors', method: 'GET', redirect: 'follow' }
-
-    const searchParams = new URLSearchParams({
-      owner: connectedWallet.address
-    })
-    const response = await fetch(`https://eth-${alchemyApi.env}.alchemyapi.io/v2/${alchemyApi.key}/getNFTs?${searchParams.toString()}`, options)
-    if (!response.statusCode == 200) {
-      throw new Error('Unable to load NFTs')
-    }
-
-    const data = await response.json()
-
-    const owned = data.ownedNfts
-      .filter(nft => nft.contract.address.toLowerCase() === tokenContractAddress.toLowerCase())
-      .map(nft => nft.id.tokenId)
-
-    return Promise.all(
-      owned.map(tokenId => {
-        const searchParams = new URLSearchParams({
-          contractAddress: tokenContractAddress,
-          tokenId 
-        })
-        return fetch(`https://eth-${alchemyApi.env}.alchemyapi.io/v2/${alchemyApi.key}/getNFTMetadata?${searchParams.toString()}`, options)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Unable to get metadata')
-            }
-
-            return response.json()
-          })
-      })
-    )
-  }
-
 </script>
 
 <div id="container">
