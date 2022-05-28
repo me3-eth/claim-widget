@@ -5,17 +5,19 @@
   import Input from './Input.svelte'
   import { nftApi } from './me3-protocol'
 
-  // Text
-  export let title = 'Claim subdomain'
-  export let claimButtonText = 'Claim'
-  export let nameLabel = 'Name'
-  export let tokenLabel = 'Token'
-  export let namePlaceholder = 'register-me'
-
   export let domain
   export let alchemyApi = { key: '', env: '' }
   export let tokenContractAddress
   export let provider
+
+  // Text
+  export let title = 'Register Your Subdomain'
+  export let description = `Choose your subdomain for ${domain} and assign it to one of your NFTs. You'll also get a profile.`
+  export let claimButtonText = 'Register'
+  export let nameLabel = 'Subdomain'
+  export let tokenLabel = 'NFT'
+  export let namePlaceholder = 'brendan'
+
 
   // Section visibility
   export let showTokenSelector = true
@@ -25,22 +27,15 @@
   let tokens = []
 
   let signer
-  let providerStore = writable(null)
-  providerStore.subscribe(async p => {
-    if (!p) return
-
-    signer = p.getSigner()
-
-    console.log({ signer })
-
-    const addr = await signer.getAddress()
-    tokens = await nftApi(tokenContractAddress, addr, { alchemyApi })
-    console.log({ tokens })
-  })
-
   $: {
-    if (provider) { providerStore.set(new ethers.providers.Web3Provider(provider)) }
-    console.log({ provider })
+    if (provider) {
+      const p = new ethers.providers.Web3Provider(provider)
+      signer = p.getSigner()
+      signer.getAddress()
+        .then(addr => nftApi(tokenContractAddress, addr, { alchemyApi }))
+        .then(results => { tokens = results })
+        .catch(() => { tokens = [] })
+    }
   }
 
   let nameField
@@ -84,8 +79,10 @@
 <div id="container">
   {#if showDescription}
     <header>
-      <h2>Register Your Subdomain</h2>
-      <p>Choose your subdomain for {domain} and assign it to one of your NFTs. You'll also get a profile.</p>
+      <h2>{title}</h2>
+      {#if description}
+        <p>{description}</p>
+      {/if}
     </header>
   {/if}
 
@@ -103,7 +100,7 @@
 
     {#if showTokenSelector}
       <br />
-      <label class:tokenError>{tokenLabel}:</label>
+      <label class:tokenError>{tokenLabel}</label>
       <TokenSelector on:tokenSelected={selectToken} {tokens} />
     {/if}
   </div>
