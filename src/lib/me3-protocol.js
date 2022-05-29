@@ -1,13 +1,13 @@
 import ethers from 'ethers'
 import ky from 'ky'
 
-const PROTOCOL_ADDRESS = ''
+const PROTOCOL_ADDRESS = '0x9f2daf90c4323b529c31a40520a5fa63eb601b84'
 
 export async function claim (domain, label, opts = {}) {
   if (!opts.provider) {
     throw new Error('Must provide an EIP-1193, EIP-1102, EIP-3085 and EIP-3326 compliant provider')
   }
-  const p = new ethers.Web3Provider(opts.provider)
+  const p = new ethers.providers.Web3Provider(opts.provider)
   const signer = p.getSigner()
 
   // check if label is properly formatted
@@ -23,9 +23,7 @@ export async function claim (domain, label, opts = {}) {
   ]
   const protocol = new ethers.Contract(PROTOCOL_ADDRESS, abi, signer)
 
-  const tx = await protocol.register(node, label, mintTo, additionalData)
-  const result = await tx.wait()
-  console.log({ result })
+  return protocol.register(node, label, mintTo, additionalData)
 }
 
 export async function nftApi (tokenAddress, walletAddress, opts = {}) {
