@@ -1,4 +1,5 @@
-import { ethers } from 'ethers'
+import ethers from 'ethers'
+import ky from 'ky'
 
 const PROTOCOL_ADDRESS = ''
 
@@ -34,21 +35,22 @@ export async function nftApi (tokenAddress, walletAddress, opts = {}) {
   const apiKey = opts.alchemyApi.key
   const apiEnv = opts.alchemyApi.env || 'mainnet'
 
-  const options = { mode: 'cors', method: 'GET', redirect: 'follow' }
+  const options = { mode: 'cors', redirect: 'follow' }
 
-  const searchParams = new URLSearchParams({
-    owner: walletAddress
-  })
-  const response = await fetch(`https://eth-${apiEnv}.alchemyapi.io/v2/${apiKey}/getNFTs?${searchParams.toString()}`, options)
-  if (!response.statusCode == 200) {
+  let owned = []
+  try {
+    const searchParams = new URLSearchParams({
+      owner: walletAddress
+    })
+    const data = await ky.get(`https://eth-${apiEnv}.alchemyapi.io/v2/${apiKey}/getNFTs`, { ...options, searchParams }).json()
+
+    owned = data.ownedNfts
+      .filter(nft => nft.contract.address.toLowerCase() === tokenAddress.toLowerCase())
+      .map(nft => nft.id.tokenId)
+
+  } catch (err) {
     throw new Error('Unable to load NFTs')
   }
-
-  const data = await response.json()
-
-  const owned = data.ownedNfts
-    .filter(nft => nft.contract.address.toLowerCase() === tokenAddress.toLowerCase())
-    .map(nft => nft.id.tokenId)
 
   return Promise.all(
     owned.map(tokenId => {
@@ -56,14 +58,8 @@ export async function nftApi (tokenAddress, walletAddress, opts = {}) {
         contractAddress: tokenAddress,
         tokenId 
       })
-      return fetch(`https://eth-${apiEnv}.alchemyapi.io/v2/${apiKey}/getNFTMetadata?${searchParams.toString()}`, options)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Unable to get metadata')
-          }
-
-          return response.json()
-        })
+      return ky.get(`https://eth-${apiEnv}.alchemyapi.io/v2/${apiKey}/getNFTMetadata`, { ...options, searchParams })
+        .json()
     })
   )
 }
