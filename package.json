@@ -1,14 +1,13 @@
 {
-  "name": "claim-widget",
+  "name": "@me3/claim-widget",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "svelte": "./src/index.js",
   "module": "./dist/index.mjs",
   "main": "./dist/index.js",
   "type": "module",
   "files": [
-    "src",
-    "dist"
+    "src"
   ],
   "scripts": {
     "dev": "vite",
@@ -21,11 +20,11 @@
   "devDependencies": {
     "@depay/web3-blockchains": "^4.5.1",
     "@depay/web3-mock": "^11.8.1",
-    "@storybook/addon-actions": "^6.5.5",
-    "@storybook/addon-links": "^6.5.5",
+    "@storybook/addon-actions": "^6.5.6",
+    "@storybook/addon-links": "^6.5.6",
     "@storybook/addon-svelte-csf": "^2.0.4",
-    "@storybook/addons": "^6.5.5",
-    "@storybook/svelte": "^6.5.5",
+    "@storybook/addons": "^6.5.6",
+    "@storybook/svelte": "^6.5.6",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
     "ava": "^4.2.0",
     "browser-env": "^3.3.0",
