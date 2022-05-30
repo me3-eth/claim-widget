@@ -17,7 +17,8 @@
   export let nameLabel = 'Subdomain'
   export let tokenLabel = 'NFT'
   export let namePlaceholder = 'brendan'
-
+  export let value
+  export let selectedToken
 
   // Section visibility
   export let showTokenSelector = true
@@ -38,8 +39,6 @@
     }
   }
 
-  let nameField
-  let selectedToken
   let connected = false
   let claimed = false
 
@@ -68,7 +67,7 @@
       return
     }
 
-    claim(domain, nameField, { provider })
+    claim(domain, value, { provider })
   }
 </script>
 
@@ -87,7 +86,7 @@
       {domain}
       placeholder={namePlaceholder}
       label={nameLabel}
-      bind:value={nameField}
+      bind:value
       bind:hasError={nameHasError}
       highlightError={highlightNameError}
       validations={nameValidations}

@@ -50,6 +50,8 @@
       return: ['0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc']
     }
   })
+
+  let defaultValue = '', defaultSelectedToken = ''
 </script>
 
 <Meta title="Claim Widget" component={ClaimWidget} decorators={[withMock]} />
@@ -59,9 +61,16 @@
     <ClaimWidget
       tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
       domain="me3.eth"
+      bind:value={defaultValue}
+      bind:selectedToken={defaultSelectedToken}
       provider={global.ethereum}
       alchemyApi={{ key: 'abc123', env: 'mainnet' }}
       />
+  </div>
+  <div class="info-pane">
+    <p><em>Bound values</em></p>
+    <p>Subdomain: {defaultValue}</p>
+    <p>Token: {defaultSelectedToken}</p>
   </div>
 </Story>
 
@@ -87,3 +96,11 @@
   </div>
 </Story>
 
+<style>
+  .info-pane {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    min-width: 200px;
+  }
+</style>
