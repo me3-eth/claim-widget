@@ -28,6 +28,8 @@
  * Released under the MIT License.
  */
 
+/*! MIT License © Sindre Sorhus */
+
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /**
@@ -47,6 +49,12 @@
  * @author Chen, Yi-Cyuan [emn178@gmail.com]
  * @copyright Chen, Yi-Cyuan 2015-2018
  * @license MIT
+ */
+
+/**
+ * mock-xmlhttprequest v7.0.4
+ * (c) 2021 Bertrand Guay-Paquet
+ * @license ISC
  */
 
 //! stable.js 0.1.8, https://github.com/Two-Screen/stable
