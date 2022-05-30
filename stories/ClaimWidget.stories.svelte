@@ -38,7 +38,7 @@
         return {
           title: `Logo #${tokenNum}`,
           id: { tokenId: searchParams.tokenId },
-          media: [{ gateway: `https://ipfs.fleek.co/ipfs/QmT3YL3ebqvMgaAz66vtiTEgoGRXJDk3pAc5QzJxwqNt1r/${tokenNum}.jpg` }]
+          media: [{ gateway: `https://storageapi.fleek.co/19601a7e-4370-48a9-9b52-d66cb11fb2e5-bucket/fakeme3nft/${tokenNum}.jpg` }]
         }
       }
     }
