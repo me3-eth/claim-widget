@@ -82,7 +82,7 @@
     <ClaimWidget
       tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
       domain="me3.eth"
-      alchemyApi={{ key: 'hP76qJi6xsXDNJIxJxEWuDj6XkasUraf', env: 'mainnet' }}
+      alchemyApi={{ key: 'abc123', env: 'mainnet' }}
       />
   </div>
 </Story>
