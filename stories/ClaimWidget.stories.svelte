@@ -1,8 +1,48 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import { action } from '@storybook/addon-actions'
+  import withMock from 'storybook-addon-mock'
   import { mock } from '@depay/web3-mock'
   import ClaimWidget from '../src/lib/ClaimWidget.svelte'
+
+  const defaultMockNfts = [
+    {
+      url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTs?owner=0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc',
+      method: 'GET',
+      status: 200,
+      response: {
+        ownedNfts: [
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x1337' }
+          },
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x1338' }
+          },
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x1339' }
+          },
+        ]
+      }
+    },
+    {
+      url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTMetadata?contractAddress=0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1&tokenId=',
+      method: 'GET',
+      status: 200,
+      response: req => {
+        const { searchParams } = req
+        const tokenNum = parseInt(searchParams.tokenId)
+
+        return {
+          title: `Logo #${tokenNum}`,
+          id: { tokenId: searchParams.tokenId },
+          media: [{ gateway: `https://ipfs.fleek.co/ipfs/QmT3YL3ebqvMgaAz66vtiTEgoGRXJDk3pAc5QzJxwqNt1r/${tokenNum}.jpg` }]
+        }
+      }
+    }
+  ]
 
   mock({
     blockchain: 'ethereum',
@@ -12,15 +52,15 @@
   })
 </script>
 
-<Meta title="Claim Widget" component={ClaimWidget} />
+<Meta title="Claim Widget" component={ClaimWidget} decorators={[withMock]} />
 
-<Story name="Default">
+<Story name="Default" parameters={{mockData: defaultMockNfts }}>
   <div style="width: 420px;">
     <ClaimWidget
       tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
       domain="me3.eth"
       provider={global.ethereum}
-      alchemyApi={{ key: 'hP76qJi6xsXDNJIxJxEWuDj6XkasUraf', env: 'mainnet' }}
+      alchemyApi={{ key: 'abc123', env: 'mainnet' }}
       />
   </div>
 </Story>
@@ -36,3 +76,14 @@
       />
   </div>
 </Story>
+
+<Story name="Missing provider">
+  <div style="width: 420px">
+    <ClaimWidget
+      tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
+      domain="me3.eth"
+      alchemyApi={{ key: 'hP76qJi6xsXDNJIxJxEWuDj6XkasUraf', env: 'mainnet' }}
+      />
+  </div>
+</Story>
+
