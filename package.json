@@ -1,6 +1,5 @@
 {
   "name": "@me3/claim-widget",
-  "private": true,
   "version": "0.2.0",
   "svelte": "./src/index.js",
   "module": "./dist/index.mjs",
@@ -10,7 +9,7 @@
     "src"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run storybook",
     "build": "build-storybook -o ./dist",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
