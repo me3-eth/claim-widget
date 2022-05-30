@@ -4,8 +4,6 @@
 
   export let tokens = []
 
-  $: console.log({ tokens })
-
   const dispatch = createEventDispatcher()
 
   let highlightToken = ''

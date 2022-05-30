@@ -1,4 +1,3 @@
-
 module.exports = {
   stories: [
     '../stories/**/*.stories.js',
@@ -7,6 +6,7 @@ module.exports = {
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-links',
-    '@storybook/addon-svelte-csf'
+    '@storybook/addon-svelte-csf',
+    'storybook-addon-mock'
   ]
 }

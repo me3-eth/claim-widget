@@ -3,12 +3,12 @@
   import { ethers } from 'ethers'
   import TokenSelector from './TokenSelector.svelte'
   import Input from './Input.svelte'
-  import { nftApi } from './me3-protocol'
+  import { claim, nftApi } from './me3-protocol'
 
   export let domain
   export let alchemyApi = { key: '', env: '' }
   export let tokenContractAddress
-  export let provider
+  export let provider = null
 
   // Text
   export let title = 'Register Your Subdomain'
@@ -32,7 +32,7 @@
       const p = new ethers.providers.Web3Provider(provider)
       signer = p.getSigner()
       signer.getAddress()
-        .then(addr => nftApi(tokenContractAddress, addr, { alchemyApi }))
+        .then(addr => nftApi(tokenContractAddress, addr, { alchemyApi })) // TODO unnecessary if not showing tokens
         .then(results => { tokens = results })
         .catch(() => { tokens = [] })
     }
@@ -47,10 +47,6 @@
   let highlightNameError = false
   let tokenError = false
 
-  let connectedWallet = {
-    address: '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc'
-  }
-
   let nameValidations = [
     s => (/[a-z0-9]*/gi).test(s),
     s => s !== '',
@@ -61,7 +57,7 @@
     if (tokenError) tokenError = false
   }
 
-  function claim () {
+  function handleClaim () {
     if (nameHasError) {
       highlightNameError = true
       return
@@ -72,7 +68,7 @@
       return
     }
 
-    claimed = true
+    claim(domain, nameField, { provider })
   }
 </script>
 
@@ -107,7 +103,7 @@
   {/if}
 
   {#if showClaimButton}
-    <button class="main-btn" on:click={claim}>{claimButtonText}</button>
+    <button disabled={provider === null} class="main-btn" on:click={handleClaim}>{claimButtonText}</button>
   {/if}
 </div>
 
@@ -159,28 +155,6 @@
 .tokenError {
   color: red;
 }
-
-  /*
-  .lesser-btn {
-    --gradient-lesser-button: linear-gradient(257.35deg, #FFFFFF 0%, rgba(255, 255, 255, 0.25) 100%);
-
-    background: var(--gradient-lesser-button);
-    border-radius: 24px;
-    backdrop-filter: blur(24px);
-    text-align: center;
-    font-size: 18px;
-    width: var(--lesser-btn-width);
-    height: var(--lesser-btn-height);
-    border: none;
-    padding: var(--lesser-btn-padding);
-    margin: 0;
-    filter: drop-shadow(0px 6px 30px rgba(108, 108, 128, 0.06));
-  }
-
-  .lesser-btn:hover {
-    box-shadow: 0px 6px 30px rgba(108, 108, 128, 0.06);
-  }
-  */
 
   label {
     display: var(--me3-label-display, block);
