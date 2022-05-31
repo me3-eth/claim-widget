@@ -23,7 +23,7 @@ export async function claim (domain, label, opts = {}) {
   ]
   const protocol = new ethers.Contract(PROTOCOL_ADDRESS, abi, signer)
 
-  return protocol.register(node, label, mintTo, additionalData)
+  return protocol.register(node, label, mintTo, additionalData, { gasLimit: 200000 })
 }
 
 export async function nftApi (tokenAddress, walletAddress, opts = {}) {
