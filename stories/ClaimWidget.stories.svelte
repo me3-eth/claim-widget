@@ -5,6 +5,22 @@
   import { mock } from '@depay/web3-mock'
   import ClaimWidget from '../src/lib/ClaimWidget.svelte'
 
+  const metadataMock = {
+    url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTMetadata?contractAddress=0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1&tokenId=',
+    method: 'GET',
+    status: 200,
+    response: req => {
+      const { searchParams } = req
+      const tokenNum = parseInt(searchParams.tokenId)
+
+      return {
+        title: `Logo #${tokenNum}`,
+        id: { tokenId: searchParams.tokenId },
+        media: [{ gateway: `https://storageapi.fleek.co/19601a7e-4370-48a9-9b52-d66cb11fb2e5-bucket/fakeme3nft/${tokenNum}.jpg` }]
+      }
+    }
+  }
+
   const defaultMockNfts = [
     {
       url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTs?owner=0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc',
@@ -27,21 +43,40 @@
         ]
       }
     },
+    metadataMock
+  ]
+
+  const manyNfts = [
     {
-      url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTMetadata?contractAddress=0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1&tokenId=',
+      url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTs?owner=0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc',
       method: 'GET',
       status: 200,
-      response: req => {
-        const { searchParams } = req
-        const tokenNum = parseInt(searchParams.tokenId)
-
-        return {
-          title: `Logo #${tokenNum}`,
-          id: { tokenId: searchParams.tokenId },
-          media: [{ gateway: `https://storageapi.fleek.co/19601a7e-4370-48a9-9b52-d66cb11fb2e5-bucket/fakeme3nft/${tokenNum}.jpg` }]
-        }
+      response: {
+        ownedNfts: [
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x1337' }
+          },
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x1338' }
+          },
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x1339' }
+          },
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x133A' }
+          },
+          {
+            contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
+            id: { tokenId: '0x133B' }
+          },
+        ]
       }
-    }
+    },
+    metadataMock
   ]
 
   mock({
@@ -71,6 +106,19 @@
     <p><em>Bound values</em></p>
     <p>Subdomain: {defaultValue}</p>
     <p>Token: {defaultSelectedToken}</p>
+  </div>
+</Story>
+
+<Story name="Many tokens" parameters={{mockData: manyNfts }}>
+  <div style="width: 420px;">
+    <ClaimWidget
+      tokenContractAddress="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
+      domain="me3.eth"
+      bind:value={defaultValue}
+      bind:selectedToken={defaultSelectedToken}
+      provider={global.ethereum}
+      alchemyApi={{ key: 'abc123', env: 'mainnet' }}
+      />
   </div>
 </Story>
 

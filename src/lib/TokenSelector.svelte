@@ -38,8 +38,11 @@
 
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 24px;
+
+    max-width: 100%;
   }
 </style>
