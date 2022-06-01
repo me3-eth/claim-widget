@@ -25,5 +25,3 @@ dist-ssr
 .nyc_output
 
 .env
-public/vendor/*
-!public/vendor/.gitkeep
