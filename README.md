@@ -1,38 +1,38 @@
-# Claim Widget
+# Subdomain Claim Widget
 
-Very, very early. Just a demo thing
+Embeddable widget for claiming subdomains through the me3 subdomain registrar contracts.
+
+## Installation
+
+Use your favourite package manager:
+
+```sh
+npm i @me3/claim-widget
+
+# OR
+pnpm i @me3/claim-widget
+
+# OR
+yarn add @me3/claim-widget
+```
 
 ## Usage
 
-### In Svelte
+The widget can be used in React, Vue, Svelte, HTML, or Angular as a Web Component.
+Check out the examples to see usage:
 
-_Writing documentation before code is actually available. Check demo code to see current state._
+* [React](/examples/react/README.md)
+* [Svelte](/examples/svelte/README.md)
+* [Svelte Kit](/examples/svelte-kit/README.md)
+* [Vue](/examples/vue/README.md)
+* [IIFE in Plain HTML](/examples/iife/README.md)
 
-```svelte
-<script>
-  import ClaimWidget from '@me3/claim-widget'
+You can also take a look at our [Storybook pages](https://me3-eth.github.io/claim-widget/)
+to see the widget working in our default me3 theme.
 
-  const ALCHEMY_API_KEY = ''
-  const NFT_CONTRACT_ADDR = ''
+## Styles
 
-  // EIP-1193, EIP-1102, EIP-3085 and EIP-3326 compliant
-  // we suggest Blocknative's web3-onboard
-  const provider = {}
-</script>
-
-<ClaimWidget
-  title="Claim subdomain"
-  nameLabel="Name"
-  namePlaceholder="Enter subdomain name..."
-  tokenLabel="NFT"
-  claimButtonText="Claim"
-  alchemyApiKey={ALCHEMY_API_KEY}
-  contractAddress={NFT_CONTRACT_ADDR}
-  {provider}
-  />
-```
-
-### Styles
+The claim-widget is themable. These are the default values:
 
 ```css
 :root {
@@ -65,3 +65,18 @@ _Writing documentation before code is actually available. Check demo code to see
   --me3-label-display: block;
 }
 ```
+
+## Development
+
+1. Clone
+2. install pkgs
+3. ???
+
+### Storybook
+
+npm run storybook
+
+### Add new example
+
+1. Try to keep it light
+2. Install as a runnable application in subfolder of _examples/_
