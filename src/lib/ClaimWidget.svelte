@@ -1,3 +1,5 @@
+<svelte:options tag="me3-claim-widget" />
+
 <script>
   import { writable } from 'svelte/store'
   import { ethers } from 'ethers'
