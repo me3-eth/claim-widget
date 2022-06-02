@@ -33,19 +33,19 @@ const commonRollupPlugins = [
 const appPath = path.resolve(__dirname, '../')
 const production = true
 const buildPath = 'dist'
-const entryPoint = path.join(appPath, 'src', 'main.js')
-const excludeComponent = /ClaimWidget\.svelte$/
+const entryPoint = path.join(appPath, 'src', 'index.js')
+const entryComponent = /index\.svelte$/
 const moduleName = packageJson.name.replace('@', '').replace('/', '-')
 const moduleVersion = packageJson.version
 
-const moduleFile = `${buildPath}/${moduleName}.js` // TODO path.join
+const moduleFile = path.join(buildPath, `${moduleName}.js`)
 const bundleName = `${moduleName}.${moduleVersion}.js`
 
 const outputOpt = {
   sourcemap: true,
   format: 'iife',
   name: 'App', // TODO correct?
-  file: `${buildPath}/${bundleName}`, // TODO path.join
+  file: path.join(buildPath, bundleName),
 }
 
 async function extractCSS() {
@@ -94,7 +94,7 @@ async function buildWebComponent({ minify, cssChunk }) {
           customElement: false
         },
         emitCss: true,
-        exclude: excludeComponent,
+        exclude: entryComponent,
         preprocess: sveltePreprocess()
       }),
 
@@ -105,7 +105,7 @@ async function buildWebComponent({ minify, cssChunk }) {
           customElement: true
         },
         emitCss: false,
-        include: excludeComponent,
+        include: entryComponent,
         preprocess: sveltePreprocess()
       }),
 
