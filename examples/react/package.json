@@ -1,0 +1,86 @@
+{
+  "name": "react-spa-template",
+  "version": "0.1.0",
+  "description": "React Single Page App template without CRA",
+  "main": "src/index.js",
+  "hompage": "https://ofnullable.github.io/react-spa-template",
+  "repository": "https://github.com/ofnullable/react-spa-template",
+  "author": "ofnullable <ofnullable@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
+  "bugs": {
+    "url": "http://github.com/ofnullable/react-spa-template/issues",
+    "email": "ofnullable@gmail.com"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development webpack serve --progress",
+    "build": "NODE_ENV=production webpack",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@me3/claim-widget": "file:../..",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/eslint-plugin": "^7.17.7",
+    "@babel/plugin-transform-react-jsx": "^7.17.12",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "@emotion/babel-plugin": "^11.9.2",
+    "@svgr/webpack": "^6.2.1",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.10",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "file-loader": "^6.2.0",
+    "gh-pages": "^4.0.0",
+    "html-loader": "^3.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "node-sass": "^7.0.1",
+    "normalize.css": "^8.0.1",
+    "postcss": "^8.4.14",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "^14.1.0",
+    "postcss-loader": "^7.0.0",
+    "postcss-preset-env": "^7.6.0",
+    "prettier": "^2.6.2",
+    "reset-css": "^5.0.1",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.02%",
+      "not dead",
+      "not op_mini all",
+      "last 3 version"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
