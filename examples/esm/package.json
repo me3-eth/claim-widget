@@ -1,0 +1,22 @@
+{
+  "name": "esm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "module": "../../src/me3-claim-widget.js",
+  "type": "module",
+  "scripts": {
+    "serve": "wds --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@web/dev-server": "^0.1.31",
+    "@web/dev-server-legacy": "^1.0.0",
+    "@webcomponents/webcomponentsjs": "^2.6.0"
+  },
+  "dependencies": {
+    "@me3/claim-widget": "file:../..",
+    "lit": "^2.2.5"
+  }
+}
