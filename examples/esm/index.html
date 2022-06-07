@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>me3 Web Component Demo</title>
+
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../node_modules/lit/polyfill-support.js"></script>
+    <script type="module" src="../../src/me3-claim-widget.js"></script>
+
+    <script src="../../node_modules/@depay/web3-mock/dist/umd/index.bundle.js"></script>
+    <script>
+      window.Web3Mock.mock({
+        blockchain: 'ethereum',
+        accounts: {
+          return: ['0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc']
+        }
+      });
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cfilter%20id%3D%22noise%22%3E%20%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.875%22%20result%3D%22noise%22%20%2F%3E%20%3CfeColorMatrix%20type%3D%22matrix%22%20values%3D%220%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200.1015625%200%22%20%2F%3E%20%3C%2Ffilter%3E%20%3Crect%20filter%3D%22url%28%23noise%29%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22512%22%20height%3D%22512%22%20fill%3D%22transparent%22%20opacity%3D%221%22%20%2F%3E%3C%2Fsvg%3E'), linear-gradient(272deg, #C3D2F7 0%, #E3E9FF 30%);
+        font-family: Outfit, sans-serif;
+        color: #1c1c33;
+      }
+
+      h1, h2, h3 {
+        color: #1c1c33;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main style="width:420px;margin:0 auto;">
+      <me3-claim-widget
+        title="Demo form"
+        description="Great demo"
+        domain="me3.eth"
+        token-address="0x9759226b2f8ddeff81583e244ef3bd13aaa7e4a1"
+        alchemy-api='{ "key": "abc123", "env": "mainnet" }'
+        />
+    </main>
+  </body>
+</html>
