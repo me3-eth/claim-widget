@@ -1,5 +1,6 @@
-import { ethers } from 'ethers'
 import ky from 'ky'
+/*
+import { ethers } from 'ethers'
 
 const PROTOCOL_ADDRESS = '0x9f2daf90c4323b529c31a40520a5fa63eb601b84'
 
@@ -25,6 +26,7 @@ export async function claim (domain, label, opts = {}) {
 
   return protocol.register(node, label, mintTo, additionalData, { gasLimit: 200000 })
 }
+*/
 
 export async function nftApi (tokenAddress, walletAddress, opts = {}) {
   if (!opts.alchemyApi || !opts.alchemyApi.key) {
