@@ -2,8 +2,8 @@
   "name": "@me3/claim-widget",
   "version": "0.3.0",
   "customElements": "custom-elements.json",
-  "main": "src/me3-claim-widget.js",
-  "module": "src/me3-claim-widget.js",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "type": "module",
   "files": [
     "src",
