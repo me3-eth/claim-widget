@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "customElements": "custom-elements.json",
   "main": "src/index.js",
-  "module": "src/index.js",
+  "module": "dist/bundle.js",
   "type": "module",
   "files": [
     "src",
@@ -14,6 +14,7 @@
     "build": "npm run build:dist && npm run build:storybook",
     "build:dist": "node ./scripts/build.cjs",
     "build:storybook": "build-storybook -o ./dist",
+    "bundle": "rollup -c",
     "preview": "vite preview",
     "serve": "wds --watch",
     "storybook": "start-storybook -p 6006",
@@ -26,6 +27,7 @@
     "@babel/eslint-parser": "^7.17.0",
     "@custom-elements-manifest/analyzer": "^0.5.7",
     "@open-wc/testing": "^3.1.5",
+    "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-replace": "^4.0.0",
     "@web/dev-server": "^0.1.31",
@@ -37,7 +39,7 @@
     "lit-analyzer": "^1.2.1",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.73.0",
+    "rollup": "^2.75.6",
     "rollup-plugin-summary": "^1.4.3",
     "rollup-plugin-terser": "^7.0.2"
   },

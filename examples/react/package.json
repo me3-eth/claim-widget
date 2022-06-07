@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=development webpack serve --progress",
+    "serve": "npm start",
     "build": "NODE_ENV=production webpack",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
@@ -25,6 +26,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@me3/claim-widget": "file:../..",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
+    "lit": "^2.2.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0"
