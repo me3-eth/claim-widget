@@ -30,8 +30,10 @@
   let signer
   $: {
     if (provider) {
+      console.log("GOT  APROVIDER")
       const p = new ethers.providers.Web3Provider(provider)
       signer = p.getSigner()
+      console.log("GOT SIGNER", {signer})
       signer.getAddress()
         .then(addr => nftApi(tokenContractAddress, addr, { alchemyApi })) // TODO unnecessary if not showing tokens
         .then(results => { tokens = results })

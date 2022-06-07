@@ -42,4 +42,4 @@
   {showClaimButton}
      />
 
-<style global src="./lib/ClaimWidget.css"></style>
+<style global src="./index.css"></style>

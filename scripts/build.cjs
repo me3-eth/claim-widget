@@ -6,7 +6,6 @@ const commonjs = require('@rollup/plugin-commonjs')
 const json = require('@rollup/plugin-json')
 const css = require('rollup-plugin-css-only')
 const replace = require('@rollup/plugin-replace')
-// const livereload = require('rollup-plugin-livereload')
 const terser = require('rollup-plugin-terser').terser
 const shell = require('shelljs')
 const fs = require('fs').promises
@@ -109,6 +108,7 @@ async function buildWebComponent({ minify, cssChunk }) {
         preprocess: sveltePreprocess()
       }),
 
+      /*
       css({
         output(nestedCSS, styleNodes, bundle) {
           const code = bundle[bundleName].code
@@ -123,10 +123,12 @@ async function buildWebComponent({ minify, cssChunk }) {
             const style = matches[1]
             bundle[bundleName].code = code.replace(style, cssChunk)
           } else {
+            console.error({ code, nestedCSS, cssChunk })
             throw new Error('Unable to shadowRoot')
           }
         }
       }),
+      */
 
       replace({
         '.head.appendChild(e': '.appendChild(e',

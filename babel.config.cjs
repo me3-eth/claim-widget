@@ -1,5 +1,5 @@
 module.exports = api => {
-  api.cache(true)
+  api.cache(false)
   const targetBrowser = { browsers: '> 1.5%, IE 11, not dead' }
 
   return {
