@@ -5,6 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "serve": "npm run dev",
     "start": "sirv public --no-clear"
   },
   "devDependencies": {
