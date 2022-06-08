@@ -7,8 +7,6 @@ import { useThemeContext } from '../contexts/ThemeContext';
 
 const globalStyle = (colors) => css`
   body {
-    color: ${colors.gray[9]};
-    background: ${colors.gray[1]};
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-property: border, background, color;
@@ -17,9 +15,11 @@ const globalStyle = (colors) => css`
   main {
     flex: 1;
     margin: 0 auto;
-    max-width: 1280px;
+    width: 420px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -29,9 +29,7 @@ const AppLayout = ({ children }) => {
   return (
     <>
       <Global styles={[globalStyle(colors)]} />
-      <Header />
       <main>{children}</main>
-      <Footer />
     </>
   );
 };

@@ -4,6 +4,7 @@ import AppRouter from './routes';
 import AppLayout from './layouts/AppLayout';
 import ThemeProvider from './contexts/ThemeContext';
 import './styles/index.scss';
+import '../../../src/demo.css'
 
 function App() {
   return (
