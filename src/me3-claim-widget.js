@@ -3,6 +3,7 @@ import { nftApi } from './lib/me3-protocol.js'
 import './header.js'
 import './input.js'
 import './token-selector.js'
+import './claim-button.js'
 
 export class ClaimWidget extends LitElement {
   static properties = {
@@ -24,6 +25,25 @@ export class ClaimWidget extends LitElement {
 
     tokens: { state: true },
   }
+
+  static styles = css`
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--me3-container-item-gap, 32px);
+
+      background: var(--me3-container-background, linear-gradient(257.35deg, #FFFFFF 0%, rgba(255, 255, 255, 0.25) 100%));
+      padding: var(--me3-container-padding, 40px 30px);
+      border-radius: var(--me3-container-border-radius, 40px);
+      box-shadow: var(--me3-container-box-shadow, 0px 6px 30px rgba(108, 108, 128, 0.06));
+      width: 100%;
+    }
+
+    section {
+      width: 100%;
+    }
+  `
 
   constructor () {
     super();
@@ -51,7 +71,7 @@ export class ClaimWidget extends LitElement {
     }
 
     return html`
-    <div>
+    <div id="container">
       ${ this.hideDescription
         ? ''
         : html`<me3-header title=${this.title} description=${this.description} />`
@@ -70,6 +90,15 @@ export class ClaimWidget extends LitElement {
         : html`
           <section>
             <me3-token-selector .tokens=${this.tokens} />
+          </section>
+          `
+      }
+
+      ${ this.hideClaimButton
+        ? ''
+        : html`
+          <section>
+            <me3-claim-button btnText="Claim" />
           </section>
           `
       }
