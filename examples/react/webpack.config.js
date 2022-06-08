@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -61,6 +62,10 @@ module.exports = {
         test: /\.svg$/,
         use: [loaders.svg, loaders.url],
       },
+      {
+        test: /\.md$/,
+        type: 'asset/source'
+      },
     ],
   },
   plugins: [
@@ -81,6 +86,7 @@ module.exports = {
           }),
         ]
       : []),
+    new NodePolyfillPlugin(),
   ],
   optimization: {
     minimize: prod,

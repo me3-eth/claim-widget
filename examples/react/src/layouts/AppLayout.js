@@ -1,8 +1,6 @@
 import React from 'react';
 import { css, Global } from '@emotion/react';
 
-import Header from './Header';
-import Footer from './Footer';
 import { useThemeContext } from '../contexts/ThemeContext';
 
 const globalStyle = (colors) => css`
@@ -15,7 +13,7 @@ const globalStyle = (colors) => css`
   main {
     flex: 1;
     margin: 0 auto;
-    width: 420px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

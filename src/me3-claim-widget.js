@@ -16,8 +16,8 @@ export class ClaimWidget extends LitElement {
     domain: { type: String },
     value: {},
     selectedToken: {},
-    alchemyApi: { type: Object, attribute: 'alchemy-api' },
-    tokenContractAddress: { type: String, attribute: 'token-address' },
+    alchemyapi: { type: Object, attribute: 'alchemy-api', reflect: true },
+    tokenContractAddress: { type: String, attribute: 'token-address', reflect: true },
 
     hideTokenSelector: { type: Boolean, attribute: 'hide-token-selector', reflect: true },
     hideDescription: { type: Boolean, attribute: 'hide-description', reflect: true },
@@ -58,14 +58,14 @@ export class ClaimWidget extends LitElement {
     this.hideDescription = false
     this.hideClaimButton = false
     this.hideTokenSelector = false
-    this.alchemyApi = {}
+    this.alchemyapi = {}
     this.tokens = []
     this.tokenContractAddress = ''
   }
 
   render() {
-    if (this.alchemyApi.key && this.alchemyApi.env) {
-      this.tokens = nftApi(this.tokenContractAddress, '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', { alchemyApi: this.alchemyApi })
+    if (this.alchemyapi.key && this.alchemyapi.env && this.tokenContractAddress) {
+      this.tokens = nftApi(this.tokenContractAddress, '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', { alchemyApi: this.alchemyapi })
     } else {
       this.tokens = Promise.resolve([])
     }
