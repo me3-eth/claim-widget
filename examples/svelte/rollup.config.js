@@ -53,9 +53,9 @@ export default {
 		// consult the documentation for details:
 		// https://github.com/rollup/plugins/tree/master/packages/commonjs
 		resolve({
-			browser: true,
-			dedupe: ['svelte'],
-      preferBuiltins: false
+			mainFields: ['browser', 'module', 'main'],
+			dedupe: ['ethers', 'svelte'],
+      preferBuiltins: true
 		}),
 		commonjs(),
 
