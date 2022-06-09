@@ -96,10 +96,12 @@ export class ClaimWidget extends LitElement {
 
   handleSelectedToken ({ detail }) {
     this.selectedToken = detail.tokenId
+    this._updateFormValidity()
   }
 
   handleSubdomainUpdate ({ detail }) {
     this.chosenSubdomain = detail.value
+    this._updateFormValidity()
   }
 
   render() {
@@ -140,7 +142,11 @@ export class ClaimWidget extends LitElement {
         ? ''
         : html`
           <section>
-            <me3-claim-button @click="${this.handleClaim}" btnText="Claim" />
+            <me3-claim-button
+              @click="${this.handleClaim}"
+              btnText=${this.claimButtonText}
+              ?disable=${this.formValid === false}
+              />
           </section>
           `
       }
@@ -148,7 +154,7 @@ export class ClaimWidget extends LitElement {
     `
   }
 
-  async _tokensMemo () {
+  _tokensMemo () {
     this.tokens
       .then(tokens => {
         if (tokens.length > 0) return
@@ -165,6 +171,10 @@ export class ClaimWidget extends LitElement {
           this.tokens = []
         }
       })
+  }
+
+  _updateFormValidity () {
+    this.formValid = !!this.chosenSubdomain && !!this.selectedToken
   }
 }
 
