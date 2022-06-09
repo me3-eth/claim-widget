@@ -1,4 +1,5 @@
 import { html, css, LitElement } from 'lit'
+import { ethers } from 'ethers'
 import { claim, nftApi } from './lib/me3-protocol.js'
 import './header.js'
 import './input.js'
@@ -68,7 +69,7 @@ export class ClaimWidget extends LitElement {
     this.hideTokenSelector = false
 
     this.alchemyapi = {}
-    this.tokens = []
+    this.tokens = Promise.resolve([])
     this.tokenContractAddress = ''
     this.formValid = false
 
@@ -102,11 +103,7 @@ export class ClaimWidget extends LitElement {
   }
 
   render() {
-    if (this.alchemyapi.key && this.alchemyapi.env && this.tokenContractAddress) {
-      this.tokens = nftApi(this.tokenContractAddress, '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', { alchemyApi: this.alchemyapi })
-    } else {
-      this.tokens = Promise.resolve([])
-    }
+    this._tokensMemo.call(this)
 
     return html`
     <div id="container">
@@ -149,6 +146,25 @@ export class ClaimWidget extends LitElement {
       }
     </div>
     `
+  }
+
+  async _tokensMemo () {
+    this.tokens
+      .then(tokens => {
+        if (tokens.length > 0) return
+
+        if (!this.provider) throw new Error('Missing provider attribute')
+
+        const p = new ethers.providers.Web3Provider(this.provider)
+        const signer = p.getSigner()
+
+        if (this.alchemyapi.key && this.alchemyapi.env && this.tokenContractAddress) {
+          this.tokens = signer.getAddress()
+            .then(walletAddr => nftApi(this.tokenContractAddress, walletAddr, { alchemyApi: this.alchemyapi }))
+        } else {
+          this.tokens = []
+        }
+      })
   }
 }
 
