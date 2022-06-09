@@ -6,6 +6,7 @@ export class TokenSelector extends LitElement {
   static properties = {
     tokens: { type: Array },
     options: { type: Object },
+    _currentlySelected: { state: true },
   }
 
   static styles = css`
@@ -29,19 +30,27 @@ export class TokenSelector extends LitElement {
     super()
     this.tokens = null
     this.options = {}
+    this._currentlySelected = null
   }
 
   handleTokenSelection (ev) {
-    console.log({ ev })
+    const { tokenId } = ev.detail
+
+    this._currentlySelected = tokenId
   }
 
   item ({ title, media, id: { tokenId } }) {
+    const isSelected = this._currentlySelected === tokenId
+
     return html`
     <li>
       <me3-image
+        key=${tokenId}
         alt=${title}
         src=${media[0].gateway}
+        tokenid=${tokenId}
         label="#${parseInt(tokenId)}"
+        ?is-selected=${isSelected}
         />
     </li>
     `
@@ -50,15 +59,15 @@ export class TokenSelector extends LitElement {
   render () {
     const tokenList = this.tokens
       .then(tokens => {
-        return tokens.map(this.item)
+        return tokens.map(this.item.bind(this))
       })
-      .catch(err => {
-        console.log({ err })
+      .catch(tokenLoadErr => {
+        console.log({ tokenLoadErr })
         return []
       })
 
     return html`
-    <ul>
+    <ul @tokenselected=${this.handleTokenSelection}>
       ${until(tokenList, html`<li>Loading</li>`)}
     </ul>
     `

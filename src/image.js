@@ -5,8 +5,9 @@ export class Image extends LitElement {
   static properties = {
     alt: { type: String },
     src: { type: String },
+    tokenId: { type: String, reflect: true },
+    isSelected: { type: Boolean, reflect: true, attribute: 'is-selected' },
     label: { type: String },
-    isSelected: { type: Boolean },
     classes: {},
   }
 
@@ -46,21 +47,34 @@ export class Image extends LitElement {
     super()
     this.isSelected = false
     this.classes = { highlight: this.isSelected }
+    this.tokenId = '0'
+    this.label = ''
   }
 
-  _dispatchSelection () {
+  _dispatchSelection (ev) {
     this.dispatchEvent(
-      new CustomEvent('tokenselected', {})
+      new CustomEvent('tokenselected', {
+        detail: { tokenId: this.tokenId },
+        bubbles: true,
+      })
     )
   }
 
   render () {
     return html`
-    <div class=${classMap(this.classes)}>
+    <div class=${classMap(this.classes)} @click=${this._dispatchSelection}>
       <img src=${this.src} width="97" height="97" alt=${this.alt} />
       <p>${this.label}</p>
     </div>
     `
+  }
+
+  update (changedProps) {
+    super.update(changedProps)
+
+    if (changedProps.has('isSelected')) {
+      this.classes = { highlight: this.isSelected }
+    }
   }
 }
 
