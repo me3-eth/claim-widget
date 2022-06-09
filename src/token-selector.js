@@ -1,6 +1,5 @@
 import { html, css, LitElement } from 'lit'
 import { until } from 'lit/directives/until.js';
-import './image.js'
 
 export class TokenSelector extends LitElement {
   static properties = {

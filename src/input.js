@@ -1,4 +1,5 @@
 import { html, css, LitElement } from 'lit'
+import { validate } from './lib/me3-protocol.js'
 
 export class Input extends LitElement {
   static properties = {
@@ -6,6 +7,9 @@ export class Input extends LitElement {
     placeholder: { type: String },
     value: { type: String },
     domain: { type: String },
+    provider: { type: Object },
+
+    _validationDelay: { state: true },
   }
 
   static styles = css`
@@ -56,10 +60,49 @@ export class Input extends LitElement {
         placeholder=${this.placeholder}
         name=${this.id}
         id=${this.id}
+        @input=${this._subdomainUpdate}
         />
         <span>.${this.domain}</span>
     </div>
     `
+  }
+
+  constructor () {
+    super()
+
+    this.provider = null
+  }
+
+  _subdomainUpdate (ev) {
+    const { value } = ev.target
+
+    clearTimeout(this._validationDelay)
+
+    const p = this.provider
+    const domain = this.domain
+
+    this._validationDelay = setTimeout(function () {
+      console.log({ p, value })
+
+      validate(domain, value, { provider: p })
+        .then(isValid => {
+          if (isValid) this._sendUpdate(value)
+          else throw new Error('Invalid')
+        })
+        .catch(err => {
+          console.log({ err })
+          // TODO set error state
+        })
+    }.bind(this), 1000)
+  }
+
+  _sendUpdate (value) {
+    this.dispatchEvent(
+      new CustomEvent('subdomainupdate', {
+        detail: { value },
+        bubbles: true,
+      })
+    )
   }
 }
 
