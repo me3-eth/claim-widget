@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import { mock } from '@depay/web3-mock'
+import { anything, mock } from '@depay/web3-mock'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import readmePath from '../../README.md'
@@ -14,9 +14,16 @@ mock({
   blockchain: 'ethereum',
   transaction: {
     to: '0x9f2daf90c4323b529c31a40520a5fa63eb601b84',
-    api: registrarAbi,
+    api: registrarAbi.abi,
     method: 'register',
-    params: ['0x868437061435f35898f8ed7fb95d62ca53b460f0bb9d1c6be3bfd796e38d8636', 'charchar', '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', []]
+    params: ['0x868437061435f35898f8ed7fb95d62ca53b460f0bb9d1c6be3bfd796e38d8636', anything, '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', []]
+  },
+  call: {
+    to: '0x9f2daf90c4323b529c31a40520a5fa63eb601b84',
+    api: registrarAbi.abi,
+    method: 'valid',
+    params: ['0x868437061435f35898f8ed7fb95d62ca53b460f0bb9d1c6be3bfd796e38d8636', anything],
+    return: true
   },
   accounts: { return: ['0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc'] }
 })
