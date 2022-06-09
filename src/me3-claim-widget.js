@@ -15,8 +15,8 @@ export class ClaimWidget extends LitElement {
     namePlaceholder: { type: String },
     domain: { type: String },
     value: {},
-    selectedToken: {},
     alchemyapi: { type: Object, attribute: 'alchemy-api', reflect: true },
+    provider: { type: Object },
     tokenContractAddress: { type: String, attribute: 'token-address', reflect: true },
 
     hideTokenSelector: { type: Boolean, attribute: 'hide-token-selector', reflect: true },
@@ -24,6 +24,10 @@ export class ClaimWidget extends LitElement {
     hideClaimButton: { type: Boolean, attribute: 'hide-claim-btn', reflect: true },
 
     tokens: { state: true },
+    selectedToken: { state: true },
+    chosenSubdomain: { state: true },
+    formValid: { state: true },
+    signer: { state: true },
   }
 
   static styles = css`
@@ -62,21 +66,39 @@ export class ClaimWidget extends LitElement {
     this.hideDescription = false
     this.hideClaimButton = false
     this.hideTokenSelector = false
+
     this.alchemyapi = {}
     this.tokens = []
     this.tokenContractAddress = ''
+    this.formValid = false
+
+    this.provider = null // TODO should go into an observable in the future
+    this.signer = null
   }
 
   handleClaim () {
-    claim(this.domain, '', { provider: this.provider })
+    if (!this.selectedToken) {
+      console.log('No token selected')
+      return
+    }
+
+    if (!this.chosenSubdomain) {
+      console.log('No valid subdomain provided')
+      return
+    }
+
+    claim(this.domain, this.chosenSubdomain, { provider: this.provider })
       .then(tx => tx.wait())
       .then(result => console.log({ claimResult: result }))
       .catch(err => console.log({ claimErr: err }))
   }
 
   handleSelectedToken ({ detail }) {
-    const { tokenId } = detail
-    console.log({ tokenId })
+    this.selectedToken = detail.tokenId
+  }
+
+  handleSubdomainUpdate ({ detail }) {
+    this.chosenSubdomain = detail.value
   }
 
   render() {
@@ -95,10 +117,12 @@ export class ClaimWidget extends LitElement {
 
       <section>
         <me3-input
+          @subdomainupdate=${this.handleSubdomainUpdate}
           domain=${this.domain}
           placeholder=${this.namePlaceholder}
           label=${this.nameLabel}
           style="width: 100%;"
+          .provider=${this.provider}
           />
       </section>
 
