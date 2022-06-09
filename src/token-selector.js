@@ -31,6 +31,10 @@ export class TokenSelector extends LitElement {
     this.options = {}
   }
 
+  handleTokenSelection (ev) {
+    console.log({ ev })
+  }
+
   item ({ title, media, id: { tokenId } }) {
     return html`
     <li>

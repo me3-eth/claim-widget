@@ -75,6 +75,11 @@ export class ClaimButton extends LitElement {
     this.disable = false
   }
 
+  handleClick () {
+    // show spinner
+    // dispatch communication event
+  }
+
   render () {
     return html`
       <button ?disabled=${this.disable} class="main-btn" >${this.btnText}</button>

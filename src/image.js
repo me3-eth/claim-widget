@@ -1,10 +1,13 @@
 import { html, css, LitElement } from 'lit'
+import {classMap} from 'lit/directives/class-map.js'
 
 export class Image extends LitElement {
   static properties = {
     alt: { type: String },
     src: { type: String },
-    label: { type: String }
+    label: { type: String },
+    isSelected: { type: Boolean },
+    classes: {},
   }
 
   static styles = css`
@@ -39,9 +42,21 @@ export class Image extends LitElement {
   }
   `
 
+  constructor() {
+    super()
+    this.isSelected = false
+    this.classes = { highlight: this.isSelected }
+  }
+
+  _dispatchSelection () {
+    this.dispatchEvent(
+      new CustomEvent('tokenselected', {})
+    )
+  }
+
   render () {
     return html`
-    <div>
+    <div class=${classMap(this.classes)}>
       <img src=${this.src} width="97" height="97" alt=${this.alt} />
       <p>${this.label}</p>
     </div>

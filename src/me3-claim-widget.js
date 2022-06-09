@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit'
-import { nftApi } from './lib/me3-protocol.js'
+import { claim, nftApi } from './lib/me3-protocol.js'
 import './header.js'
 import './input.js'
 import './token-selector.js'
@@ -42,6 +42,10 @@ export class ClaimWidget extends LitElement {
 
     section {
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
   `
 
@@ -63,6 +67,13 @@ export class ClaimWidget extends LitElement {
     this.tokenContractAddress = ''
   }
 
+  handleClaim () {
+    claim(this.domain, '', { provider: this.provider })
+      .then(tx => tx.wait())
+      .then(result => console.log({ claimResult: result }))
+      .catch(err => console.log({ claimErr: err }))
+  }
+
   render() {
     if (this.alchemyapi.key && this.alchemyapi.env && this.tokenContractAddress) {
       this.tokens = nftApi(this.tokenContractAddress, '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', { alchemyApi: this.alchemyapi })
@@ -82,6 +93,7 @@ export class ClaimWidget extends LitElement {
           domain=${this.domain}
           placeholder=${this.namePlaceholder}
           label=${this.nameLabel}
+          style="width: 100%;"
           />
       </section>
 
@@ -89,7 +101,7 @@ export class ClaimWidget extends LitElement {
         ? ''
         : html`
           <section>
-            <me3-token-selector .tokens=${this.tokens} />
+            <me3-token-selector style="width: 100%;" .tokens=${this.tokens} />
           </section>
           `
       }
@@ -98,7 +110,7 @@ export class ClaimWidget extends LitElement {
         ? ''
         : html`
           <section>
-            <me3-claim-button btnText="Claim" />
+            <me3-claim-button @click="${this.handleClaim}" btnText="Claim" />
           </section>
           `
       }
