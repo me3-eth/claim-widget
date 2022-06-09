@@ -74,6 +74,11 @@ export class ClaimWidget extends LitElement {
       .catch(err => console.log({ claimErr: err }))
   }
 
+  handleSelectedToken ({ detail }) {
+    const { tokenId } = detail
+    console.log({ tokenId })
+  }
+
   render() {
     if (this.alchemyapi.key && this.alchemyapi.env && this.tokenContractAddress) {
       this.tokens = nftApi(this.tokenContractAddress, '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', { alchemyApi: this.alchemyapi })
@@ -101,7 +106,11 @@ export class ClaimWidget extends LitElement {
         ? ''
         : html`
           <section>
-            <me3-token-selector style="width: 100%;" .tokens=${this.tokens} />
+            <me3-token-selector
+              @tokenselected=${this.handleSelectedToken}
+              style="width: 100%;"
+              .tokens=${this.tokens}
+              />
           </section>
           `
       }
