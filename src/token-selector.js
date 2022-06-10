@@ -6,7 +6,8 @@ export class TokenSelector extends LitElement {
   static properties = {
     tokens: { type: Array },
     options: { type: Object },
-    _currentlySelected: { state: true },
+    disable: { type: Boolean },
+    selected: { type: String },
   }
 
   static styles = css`
@@ -80,11 +81,13 @@ export class TokenSelector extends LitElement {
     super()
     this.tokens = null
     this.options = {}
-    this._currentlySelected = null
+    this.disable = false
   }
 
   setSelectedToken (tokenId) {
     return function () {
+      if (this.disable) return
+
       this.dispatchEvent(
         new CustomEvent('tokenselected', {
           detail: { tokenId },
@@ -98,7 +101,13 @@ export class TokenSelector extends LitElement {
     return html`
     <li>
       <label @click=${this.setSelectedToken(tokenId)}>
-        <input type="radio" name="token" value=${tokenId} />
+        <input
+          type="radio"
+          name="token"
+          value=${tokenId}
+          ?disabled=${this.disable}
+          ?checked=${this.selected === tokenId}
+          />
         <img src=${media[0].gateway} width="97" height="97" alt=${title} />
         <p>#${parseInt(tokenId)}</p>
       </label>

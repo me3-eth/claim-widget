@@ -142,6 +142,8 @@ export class ClaimWidget extends LitElement {
               @tokenselected=${this.handleSelectedToken}
               style="width: 100%;"
               .tokens=${this.tokens}
+              ?disable=${this.minting}
+              selected=${this.selectedToken}
               />
           </section>
           `
