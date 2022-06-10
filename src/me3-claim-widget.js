@@ -130,6 +130,7 @@ export class ClaimWidget extends LitElement {
           label=${this.nameLabel}
           style="width: 100%;"
           .provider=${this.provider}
+          ?disable=${this.minting}
           />
       </section>
 

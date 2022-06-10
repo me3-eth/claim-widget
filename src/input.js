@@ -8,6 +8,7 @@ export class Input extends LitElement {
     value: { type: String },
     domain: { type: String },
     provider: { type: Object },
+    disable: { type: Boolean },
 
     _validationDelay: { state: true },
   }
@@ -61,6 +62,7 @@ export class Input extends LitElement {
         name=${this.id}
         id=${this.id}
         @input=${this._subdomainUpdate}
+        ?disabled=${this.disable}
         />
         <span>.${this.domain}</span>
     </div>
@@ -71,6 +73,7 @@ export class Input extends LitElement {
     super()
 
     this.provider = null
+    this.disable = false
   }
 
   _subdomainUpdate (ev) {
