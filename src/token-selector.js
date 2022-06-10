@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit'
 import { until } from 'lit/directives/until.js';
+import './loading.js'
 
 export class TokenSelector extends LitElement {
   static properties = {
@@ -65,6 +66,14 @@ export class TokenSelector extends LitElement {
     margin: 0;
     color: #515161;
   }
+
+  .loading-holder {
+    min-height: 121px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   `
 
   constructor () {
@@ -107,10 +116,16 @@ export class TokenSelector extends LitElement {
         return []
       })
 
+    const loader = html`
+      <li class="loading-holder">
+        <me3-loading-icon />
+      </li>
+    `
+
     return html`
     <form class="token-form">
       <ul>
-        ${until(tokenList, html`<li>Loading</li>`)}
+        ${until(tokenList, loader)}
       </ul>
     </form>
     `
