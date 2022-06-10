@@ -3,7 +3,6 @@ import { html, css, LitElement } from 'lit'
 export class ClaimButton extends LitElement {
   static properties = {
     disable: { type: Boolean },
-    btnText: { type: String }
   }
 
   static styles = css`
@@ -75,14 +74,10 @@ export class ClaimButton extends LitElement {
     this.disable = false
   }
 
-  handleClick () {
-    // show spinner
-    // dispatch communication event
-  }
-
+  // Button bubbles click event
   render () {
     return html`
-      <button ?disabled=${this.disable} class="main-btn" >${this.btnText}</button>
+      <button ?disabled=${this.disable} class="main-btn" ><slot></slot></button>
     `
   }
 }

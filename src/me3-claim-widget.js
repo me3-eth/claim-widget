@@ -5,6 +5,7 @@ import './header.js'
 import './input.js'
 import './token-selector.js'
 import './claim-button.js'
+import './loading.js'
 
 export class ClaimWidget extends LitElement {
   static properties = {
@@ -29,6 +30,7 @@ export class ClaimWidget extends LitElement {
     chosenSubdomain: { state: true },
     formValid: { state: true },
     signer: { state: true },
+    minting: { state: true },
   }
 
   static styles = css`
@@ -75,6 +77,7 @@ export class ClaimWidget extends LitElement {
 
     this.provider = null // TODO should go into an observable in the future
     this.signer = null
+    this.minting = false
   }
 
   handleClaim () {
@@ -88,10 +91,15 @@ export class ClaimWidget extends LitElement {
       return
     }
 
+    this.minting = true
+
     claim(this.domain, this.chosenSubdomain, { provider: this.provider })
       .then(tx => tx.wait())
       .then(result => console.log({ claimResult: result }))
       .catch(err => console.log({ claimErr: err }))
+      .finally((function () {
+        this.minting = false
+      }).bind(this))
   }
 
   handleSelectedToken ({ detail }) {
@@ -144,9 +152,10 @@ export class ClaimWidget extends LitElement {
           <section>
             <me3-claim-button
               @click="${this.handleClaim}"
-              btnText=${this.claimButtonText}
               ?disable=${this.formValid === false}
-              />
+              >
+              ${this.minting ? html`<me3-loading-icon />` : this.claimButtonText}
+            </me3-claim-button>
           </section>
           `
       }
