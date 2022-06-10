@@ -100,7 +100,7 @@ const HomePage = () => {
   return (
     <div css={containerStyle}>
       <section css={sectionStyle}>
-        <div css={css`width: 500px`}>
+        <div css={css`width: 430px`}>
           <WebComponent
             component="me3-claim-widget"
             domain="me3.eth"

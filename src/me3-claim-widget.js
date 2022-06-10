@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit'
 import { ethers } from 'ethers'
+
 import { claim, nftApi } from './lib/me3-protocol.js'
 import './header.js'
 import './input.js'
@@ -44,7 +45,6 @@ export class ClaimWidget extends LitElement {
       padding: var(--me3-container-padding, 40px 30px);
       border-radius: var(--me3-container-border-radius, 40px);
       box-shadow: var(--me3-container-box-shadow, 0px 6px 30px rgba(108, 108, 128, 0.06));
-      width: 100%;
     }
 
     section {

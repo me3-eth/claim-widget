@@ -1,4 +1,5 @@
 import { html, css, LitElement } from 'lit'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { validate } from './lib/me3-protocol.js'
 
 export class Input extends LitElement {
@@ -11,6 +12,8 @@ export class Input extends LitElement {
     disable: { type: Boolean },
 
     _validationDelay: { state: true },
+    _widenerRef: { state: true },
+    _inputRef: { state: true },
   }
 
   static styles = css`
@@ -30,11 +33,13 @@ export class Input extends LitElement {
       border: 0;
       text-align: right;
       outline: none;
-      width: 100%;
       background: transparent;
       color: var(--me3-input-text-color, #1c1c33);
       margin: 0;
       padding: 0;
+      position: absolute;
+      width: 100%;
+      left: 0;
     }
 
     .fake-input {
@@ -48,6 +53,18 @@ export class Input extends LitElement {
       margin: var(--me3-input-margin, 0);
       background: var(--me3-input-background, #ffffff);
     }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap input {
+    }
+
+    .widener {
+      padding: 0;
+      visibility: hidden;
+    }
   `
 
   render() {
@@ -55,16 +72,20 @@ export class Input extends LitElement {
     <label for=${this.id}>${this.label}</label>
 
     <div class="fake-input">
-      <input
-        value=${this.value}
-        type="text"
-        placeholder=${this.placeholder}
-        name=${this.id}
-        id=${this.id}
-        @input=${this._subdomainUpdate}
-        ?disabled=${this.disable}
-        />
-        <span>.${this.domain}</span>
+      <div class="input-wrap">
+        <span class="widener">${this.placeholder}</span>
+        <input
+          ${ref(this._inputRef)}
+          value=${this.value}
+          type="text"
+          placeholder=${this.placeholder}
+          name=${this.id}
+          id=${this.id}
+          @input=${this._subdomainUpdate}
+          ?disabled=${this.disable}
+          />
+      </div>
+      <span>.${this.domain}</span>
     </div>
     `
   }
@@ -74,9 +95,13 @@ export class Input extends LitElement {
 
     this.provider = null
     this.disable = false
+    this._widenerRef = createRef()
+    this._inputRef = createRef()
   }
 
   _subdomainUpdate (ev) {
+    this._widenerRef.value.innerHTML = this._inputRef.value.value
+
     const { value } = ev.target
 
     clearTimeout(this._validationDelay)
