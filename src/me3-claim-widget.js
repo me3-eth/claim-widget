@@ -152,7 +152,7 @@ export class ClaimWidget extends LitElement {
           <section>
             <me3-claim-button
               @click="${this.handleClaim}"
-              ?disable=${this.formValid === false}
+              ?disable=${this.formValid === false || this.minting}
               >
               ${this.minting ? html`<me3-loading-icon />` : this.claimButtonText}
             </me3-claim-button>
