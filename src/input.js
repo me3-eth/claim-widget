@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit'
 import { createRef, ref } from 'lit/directives/ref.js'
-import { validate } from './lib/me3-protocol.js'
+import { validate } from './lib/protocol.js'
 import './icons/loading.js'
 import './icons/valid.js'
 import './icons/error.js'

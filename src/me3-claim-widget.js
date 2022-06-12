@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit'
 import { ethers } from 'ethers'
 
-import { claim, nftApi } from './lib/me3-protocol.js'
+import { claim, nftApi } from './lib/protocol.js'
 import './header.js'
 import './input.js'
 import './token-selector.js'

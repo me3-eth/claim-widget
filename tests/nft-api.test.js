@@ -1,6 +1,6 @@
 import test from 'ava'
 import nock from 'nock'
-import { nftApi } from '../src/lib/me3-protocol.js'
+import { nftApi } from '../src/lib/protocol.js'
 
 test('should throw an error if no credentials passed in', async (t) => {
   return t.throwsAsync(nftApi('0x0', '0x0'))
