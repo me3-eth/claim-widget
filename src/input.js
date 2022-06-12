@@ -12,7 +12,6 @@ export class Input extends LitElement {
     disable: { type: Boolean },
 
     _validationDelay: { state: true },
-    _widenerRef: { state: true },
     _inputRef: { state: true },
   }
 
@@ -35,11 +34,12 @@ export class Input extends LitElement {
       outline: none;
       background: transparent;
       color: var(--me3-input-text-color, #1c1c33);
-      margin: 0;
+      margin: auto 0;
       padding: 0;
       position: absolute;
-      width: 100%;
       left: 0;
+      top: 0;
+      bottom: 0;
     }
 
     .fake-input {
@@ -54,16 +54,40 @@ export class Input extends LitElement {
       background: var(--me3-input-background, #ffffff);
     }
 
+    .fake-input > *,
+    .fake-input input {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      font-family: 'Outfit';
+    }
+
     .input-wrap {
+      display: inline-grid;
+      vertical-align: top;
+      align-items: center;
       position: relative;
     }
 
+    .input-wrap::after,
     .input-wrap input {
+      width: auto;
+      min-width: 1ch;
+      grid-area: 1/2;
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
+      resize: none;
     }
 
-    .widener {
-      padding: 0;
+    .input-wrap::after {
+      content: attr(data-value) "";
       visibility: hidden;
+      white-space: pre-wrap;
+    }
+
+    .input-wrap input {
+      width: 100%;
     }
   `
 
@@ -73,8 +97,8 @@ export class Input extends LitElement {
 
     <div class="fake-input">
       <div class="input-wrap">
-        <span class="widener">${this.placeholder}</span>
         <input
+          size=${this.placeholder.length}
           ${ref(this._inputRef)}
           value=${this.value}
           type="text"
@@ -95,14 +119,14 @@ export class Input extends LitElement {
 
     this.provider = null
     this.disable = false
-    this._widenerRef = createRef()
     this._inputRef = createRef()
   }
 
   _subdomainUpdate (ev) {
-    this._widenerRef.value.innerHTML = this._inputRef.value.value
+    const managedValue = this._inputRef.value.value.replaceAll(/[^a-z0-9]/ig, '')
 
-    const { value } = ev.target
+    this._inputRef.value.value = managedValue
+    this._inputRef.value.parentNode.dataset.value = managedValue || this.placeholder
 
     clearTimeout(this._validationDelay)
 
@@ -110,11 +134,10 @@ export class Input extends LitElement {
     const domain = this.domain
 
     this._validationDelay = setTimeout(function () {
-      console.log({ p, value })
 
-      validate(domain, value, { provider: p })
+      validate(domain, managedValue, { provider: p })
         .then(isValid => {
-          if (isValid) this._sendUpdate(value)
+          if (isValid) this._sendUpdate(managedValue)
           else throw new Error('Invalid')
         })
         .catch(err => {
