@@ -84,6 +84,10 @@ const containerStyle = css`
 
 const sectionStyle = css`
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 `
 
 const codeStyle = css``
@@ -101,6 +105,7 @@ const HomePage = () => {
     <div css={containerStyle}>
       <section css={sectionStyle}>
         <div css={css`width: 430px`}>
+          <h1>Full widget</h1>
           <WebComponent
             component="me3-claim-widget"
             domain="me3.eth"
@@ -109,29 +114,45 @@ const HomePage = () => {
             token-address="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
             />
         </div>
+
+        <div css={css`width: 430px`}>
+          <h1>Mini widget</h1>
+          <WebComponent
+            component="me3-claim-widget"
+            domain="me3.eth"
+            provider={window.ethereum}
+            alchemyapi={{ key: 'abc123', env: 'mainnet' }}
+            token-address="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
+            hide-token-selector="true"
+            hide-description="true"
+            hide-claim-btn="true"
+            />
+        </div>
       </section>
 
       <section css={sectionStyle}>
-        <ReactMarkdown
-          children={readmeSrc}
-          components={{
-            code({ node, inline, className, children, ...props }) {
-              const match =  /language-(\w+)/.exec(className || '')
-              return !inline && match ? (
-                <SyntaxHighlighter
-                  children={String(children).replace(/\n$/, '')}
-                  language={match[1]}
-                  PreTag="div"
-                  {...props}
-                />
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              )
-            }
-          }}
-        />
+        <div>
+          <ReactMarkdown
+            children={readmeSrc}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match =  /language-(\w+)/.exec(className || '')
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    children={String(children).replace(/\n$/, '')}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  />
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                )
+              }
+            }}
+          />
+        </div>
       </section>
     </div>
   );

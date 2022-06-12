@@ -17,7 +17,6 @@ export class ClaimWidget extends LitElement {
     tokenLabel: { type: String },
     namePlaceholder: { type: String },
     domain: { type: String },
-    value: {},
     alchemyapi: { type: Object, attribute: 'alchemy-api', reflect: true },
     provider: { type: Object },
     tokenContractAddress: { type: String, attribute: 'token-address', reflect: true },
@@ -110,6 +109,13 @@ export class ClaimWidget extends LitElement {
   handleSubdomainUpdate ({ detail }) {
     this.chosenSubdomain = detail.value
     this._updateFormValidity()
+    this.dispatchEvent(
+      new CustomEvent('subdomainupdate', {
+        detail,
+        bubbles: true,
+        composed: true
+      })
+    )
   }
 
   render() {
@@ -169,7 +175,7 @@ export class ClaimWidget extends LitElement {
   _tokensMemo () {
     this.tokens
       .then(tokens => {
-        if (tokens.length > 0) return
+        if (tokens.length > 0 || this.hideTokenSelector) return
 
         if (!this.provider) throw new Error('Missing provider attribute')
 
@@ -180,7 +186,7 @@ export class ClaimWidget extends LitElement {
           this.tokens = signer.getAddress()
             .then(walletAddr => nftApi(this.tokenContractAddress, walletAddr, { alchemyApi: this.alchemyapi }))
         } else {
-          this.tokens = []
+          this.tokens = Promise.resolve([])
         }
       })
   }

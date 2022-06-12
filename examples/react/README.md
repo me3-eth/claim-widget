@@ -28,7 +28,7 @@ npm i @clubajax/react-web-component
 
 The claim widget is flexible and can be used as part of an NFT mint or as a value add post-mint.
 
-### Post-Mint
+### Full widget
 
 **Scenario:** Your hodlers have already minted their tokens, now we can tie a subdomain to any one of their tokens
 
@@ -45,7 +45,7 @@ import '@me3/claim-widget'
   />
 ```
 
-### At mint
+### Mini widget
 
 **Scenario:** You want to allow for subdomains to be minted at the same time that your NFT is minting
 
@@ -56,9 +56,11 @@ import * as cw from '@me3/claim-widget'
 <WebComponent
   component="me3-claim-widget"
   domain="me3.eth"
+  provider={window.ethereum}
+  alchemyapi={{ key: 'demo', env: 'mainnet' }}
   token-address="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
-  hideDescription
-  hideClaimButton
-  hideTokenSelector
+  hide-token-selector="true"
+  hide-description="true"
+  hide-claim-btn="true"
   />
 ```

@@ -192,7 +192,6 @@ export class Input extends LitElement {
         .catch(err => {
           console.log({ err })
           this._validationState = VALIDATION_STATE.ERROR
-          // TODO set error state
         })
     }.bind(this), 1000)
   }
