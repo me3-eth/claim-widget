@@ -34,7 +34,7 @@ export class LoadingIcon extends LitElement {
   render () {
     return html`
     <div class="loading" style="--refresh-icon-width: ${this.width}px; --refresh-icon-height: ${this.height}px">
-      <svg ${this.width} ${this.height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width=${this.width} height=${this.height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill="${this.color}" d="M18.364 5.636L16.95 7.05A7 7 0 1019 12h2a9 9 0 11-2.636-6.364z"/>
       </svg>
     </div>

@@ -1,7 +1,9 @@
 import { html, css, LitElement } from 'lit'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { validate } from './lib/me3-protocol.js'
-import './loading.js'
+import './icons/loading.js'
+import './icons/valid.js'
+import './icons/error.js'
 
 const VALIDATION_STATE = {
   IDLE: 0,
@@ -107,6 +109,7 @@ export class Input extends LitElement {
 
     .state-icon {
       width: 24px;
+      height: 24px;
     }
   `
 
@@ -150,13 +153,13 @@ export class Input extends LitElement {
     let icon
     switch (currentState) {
       case VALIDATION_STATE.SEARCHING:
-        icon = html`<me3-loading-icon />`
+        icon = html`<me3-loading-icon width="24" height="24" />`
         break
       case VALIDATION_STATE.VALID:
-        icon = html`yay`
+        icon = html`<me3-valid-icon />`
         break
       case VALIDATION_STATE.ERROR:
-        icon = html`boo`
+        icon = html`<me3-error-icon />`
         break
       default:
         icon = html``

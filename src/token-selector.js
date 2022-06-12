@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit'
 import { until } from 'lit/directives/until.js';
-import './loading.js'
+import './icons/loading.js'
 
 export class TokenSelector extends LitElement {
   static properties = {

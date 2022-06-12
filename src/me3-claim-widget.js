@@ -6,7 +6,7 @@ import './header.js'
 import './input.js'
 import './token-selector.js'
 import './claim-button.js'
-import './loading.js'
+import './icons/loading.js'
 
 export class ClaimWidget extends LitElement {
   static properties = {
