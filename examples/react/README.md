@@ -53,6 +53,17 @@ import '@me3/claim-widget'
 import WebComponent from '@clubajax/react-web-component'
 import * as cw from '@me3/claim-widget'
 
+let subdomain = ''
+
+function mint () {
+  const tokenId = /* your token minting function */ 7;
+
+  cw.claim('me3.eth', subdomain, { authData: [tokenId] })
+    .then(tx => tx.wait())
+    .then(result => console.log({ result })
+    .catch(claimErr => console.log({ claimErr })
+}
+
 <WebComponent
   component="me3-claim-widget"
   domain="me3.eth"
@@ -62,5 +73,8 @@ import * as cw from '@me3/claim-widget'
   hide-token-selector="true"
   hide-description="true"
   hide-claim-btn="true"
+  onSubdomainupdated{({ detail }) => subdomain = detail.value}
   />
+
+<button onClick={mint}>Mint</button>
 ```
