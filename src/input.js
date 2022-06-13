@@ -179,6 +179,11 @@ export class Input extends LitElement {
     const p = this.provider
     const domain = this.domain
 
+    if (!managedValue) {
+      this._validationState = VALIDATION_STATE.ERROR
+      return
+    }
+
     this._validationDelay = setTimeout(function () {
 
       this._validationState = VALIDATION_STATE.SEARCHING
