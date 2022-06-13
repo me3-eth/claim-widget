@@ -119,7 +119,7 @@ export class Input extends LitElement {
 
     <div class="fake-input">
       <div style="display: flex;">
-        <div class="input-wrap">
+        <div class="input-wrap" data-value=${this.placeholder}>
           <input
             size=${this.placeholder.length}
             ${ref(this._inputRef)}
