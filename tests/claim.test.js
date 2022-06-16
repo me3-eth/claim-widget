@@ -1,7 +1,7 @@
 import test from 'ava'
 import { mock } from '@depay/web3-mock'
 import { readFile } from 'fs/promises'
-import { claim } from '../src/lib/me3-protocol.js'
+import { claim } from '../src/lib/protocol.js'
 
 async function getAbi (contract = 'Registrar') {
   const file = await readFile(new URL(`./${contract}.json`, import.meta.url))

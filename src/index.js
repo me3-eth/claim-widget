@@ -1,2 +1,2 @@
-export { default as ClaimWidget } from './lib/ClaimWidget.svelte'
-export { claim, nftApi } from './lib/me3-protocol.js'
+export { claim, nftApi } from './lib/protocol.js'
+export * from './me3-claim-widget.js'
