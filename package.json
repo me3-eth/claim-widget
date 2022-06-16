@@ -7,6 +7,7 @@
   "type": "module",
   "files": [
     "src",
+    "dist",
     "package.json"
   ],
   "scripts": {
