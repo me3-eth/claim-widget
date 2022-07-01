@@ -1,7 +1,7 @@
 import ky from 'ky'
 import { ethers } from 'ethers'
 
-const PROTOCOL_ADDRESS = '0x9f2daf90c4323b529c31a40520a5fa63eb601b84'
+const PROTOCOL_ADDRESS = '0x9fef5b1868de0c511121a3c354c28e2b741eb101'
 
 export async function claim (domain, label, opts = {}) {
   if (!opts.provider) {
