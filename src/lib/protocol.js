@@ -14,17 +14,19 @@ export async function claim (domain, label, opts = {}) {
   // check if domain is properly formatted
 
   const additionalData = opts.authData || []
+  const encodedAdditionalData = ethers.utils.defaultAbiCoder.encode(["uint256"], additionalData)
+
   const node = ethers.utils.namehash(domain)
   const mintTo = opts.ownerAddress || await signer.getAddress()
 
   // create contract
   const abi = [
-    'function register(bytes32,string,address,bytes[]) public'
+    'function register(bytes32,string,address,bytes) public'
   ]
   const protocol = new ethers.Contract(PROTOCOL_ADDRESS, abi, signer)
 
   // TODO need to narrow down the gasLimit
-  return protocol.register(node, label, mintTo, additionalData, { gasLimit: 200000 })
+  return protocol.register(node, label, mintTo, encodedAdditionalData, { gasLimit: 200000 })
 }
 
 /**
