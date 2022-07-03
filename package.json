@@ -1,6 +1,6 @@
 {
   "name": "@me3/claim-widget",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "customElements": "custom-elements.json",
   "main": "src/index.js",
   "module": "dist/bundle.js",
