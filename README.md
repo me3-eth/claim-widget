@@ -16,6 +16,15 @@ pnpm i @me3/claim-widget
 yarn add @me3/claim-widget
 ```
 
+### Requirements
+
+* Credentials for Alchemy API to pull NFTs
+* A provider object that supports the following EIPs:
+  * 1193
+  * 1102
+  * 3085
+  * 3326
+
 ## Usage
 
 The widget can be used in React, Vue, Svelte, HTML, or Angular as a Web Component.
@@ -29,6 +38,9 @@ Check out the examples to see usage:
 
 You can also take a look at our [Storybook pages](https://me3-eth.github.io/claim-widget/)
 to see the widget working in our default me3 theme.
+
+### Options
+
 
 ## Styles
 

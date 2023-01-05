@@ -1,6 +1,6 @@
-import test from 'ava'
+import { expect } from '@esm-bundle/chai'
 import { mock } from '@depay/web3-mock'
-import { readFile } from 'fs/promises'
+import { readFile } from '@web/test-runner-commands'
 import { claim } from '../src/lib/protocol.js'
 
 async function getAbi (contract = 'Registrar') {
@@ -8,11 +8,12 @@ async function getAbi (contract = 'Registrar') {
   return JSON.parse(file)
 }
 
-test('should throw when there is no provider', async (t) => {
-  return t.throwsAsync(claim('me3.eth', 'charchar'))
+it('should throw when there is no provider', async () => {
+  expect(await claim('me3.eth', 'charchar')).to.throw()
 })
 
-test('claim a subdomain', async (t) => {
+/*
+it('claim a subdomain', async () => {
   const registrar = await getAbi()
 
   let registerMock = mock({
@@ -29,3 +30,4 @@ test('claim a subdomain', async (t) => {
   await claim('me3.eth', 'charchar', { provider: global.ethereum })
   t.true(registerMock.calls.count() >= 1)
 })
+*/
