@@ -3,13 +3,13 @@
 **Scenario:** You want to allow for subdomains to be minted at the same time that your NFT is minting
 
 ```jsx
-import WebComponent from '@clubajax/react-web-component'
+import { createComponent } from '@lit-labs/react'
 import * as cw from '@me3/claim-widget'
 
 let subdomain = ''
 
 function mint () {
-  const tokenId = /* your token minting function */ 7;
+  const tokenId = /* your token minting function */;
 
   cw.claim('me3.eth', subdomain, { authData: [tokenId] })
     .then(tx => tx.wait())
@@ -17,8 +17,13 @@ function mint () {
     .catch(claimErr => console.log({ claimErr })
 }
 
-<WebComponent
-  component="me3-claim-widget"
+const Me3ClaimWidget = createComponent({
+  react: React,
+  tagName: 'me3-claim-widget',
+  elementClass: cw.ClaimWidget
+})
+
+<Me3ClaimWidget
   domain="me3.eth"
   provider={window.ethereum}
   alchemyapi={{ key: 'demo', env: 'mainnet' }}

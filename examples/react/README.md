@@ -8,20 +8,10 @@ Add to your project:
 
 ```sh
 # with yarn
-yarn add @me3/claim-widget
+yarn add @me3/claim-widget @lit-labs/react
 
 # with npm
-npm i @me3/claim-widget
-```
-
-Optionally, install a webcomponent wrapper:
-
-```sh
-# with yarn
-yarn add @clubajax/react-web-component
-
-# with npm
-npm i @clubajax/react-web-component
+npm i @me3/claim-widget @lit-labs/react
 ```
 
 ## Usage

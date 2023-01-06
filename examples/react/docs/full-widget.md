@@ -3,11 +3,16 @@
 **Scenario:** Your hodlers have already minted their tokens, now we can tie a subdomain to any one of their tokens
 
 ```jsx
-import WebComponent from '@clubajax/react-web-component'
-import '@me3/claim-widget'
+import { createComponent } from '@lit-labs/react'
+import { ClaimWidget } from '@me3/claim-widget'
 
-<WebComponent
-  component="me3-claim-widget"
+const Me3ClaimWidget = createComponent({
+  react: React,
+  tagName: 'me3-claim-widget',
+  elementClass: ClaimWidget
+})
+
+<Me3ClaimWidget
   domain="me3.eth"
   provider={window.ethereum}
   alchemyapi={{ key: 'demo', env: 'mainnet' }}

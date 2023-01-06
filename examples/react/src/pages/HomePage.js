@@ -8,11 +8,10 @@ import readmePath from '../../README.md'
 import fullWidgetPath from '../../docs/full-widget.md'
 import miniWidgetPath from '../../docs/mini-widget.md'
 import registrarAbi from '../../../../tests/Registrar.json'
-import faker from 'storybook-addon-mock/dist/utils/faker.js'
 
-// import WebComponent from '@clubajax/react-web-component'
 import { ClaimWidget } from '@me3/claim-widget'
 
+// Mock blockchain requests
 mock({
   blockchain: 'ethereum',
   transaction: {
@@ -30,49 +29,6 @@ mock({
   },
   accounts: { return: ['0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc'] }
 })
-
-const metadataMock = {
-  url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTMetadata?contractAddress=0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1&tokenId=',
-  method: 'GET',
-  status: 200,
-  response: req => {
-    const { searchParams } = req
-    const tokenNum = parseInt(searchParams.tokenId)
-
-    return {
-      title: `Logo #${tokenNum}`,
-      id: { tokenId: searchParams.tokenId },
-      media: [{ gateway: `https://storageapi.fleek.co/19601a7e-4370-48a9-9b52-d66cb11fb2e5-bucket/fakeme3nft/${tokenNum}.jpg` }]
-    }
-  }
-}
-
-const defaultMockNfts = [
-  {
-    url: 'https://eth-mainnet.alchemyapi.io/v2/abc123/getNFTs?owner=0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc',
-    method: 'GET',
-    status: 200,
-    response: {
-      ownedNfts: [
-        {
-          contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
-          id: { tokenId: '0x1337' }
-        },
-        {
-          contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
-          id: { tokenId: '0x1338' }
-        },
-        {
-          contract: { address: '0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1' },
-          id: { tokenId: '0x1339' }
-        },
-      ]
-    }
-  },
-  metadataMock
-]
-
-faker.makeInitialRequestMap(defaultMockNfts)
 
 const containerStyle = css`
   width: 100%;
