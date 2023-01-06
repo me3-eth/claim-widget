@@ -7,19 +7,13 @@
   "type": "module",
   "scripts": {
     "dev": "npm run storybook",
-    "build": "npm run build:dist && npm run build:storybook",
-    "build:dist": "node ./scripts/build.cjs",
+    "build": "npm run build:storybook",
     "build:storybook": "build-storybook -o ./dist",
-    "bundle": "rollup -c",
-    "preview": "vite preview",
     "serve": "wds --watch",
     "storybook": "start-storybook -p 6006",
-    "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer",
-    "build-storybook": "build-storybook"
+    "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.1",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
     "@babel/core": "^7.20.5",
     "@babel/eslint-parser": "^7.17.0",
     "@custom-elements-manifest/analyzer": "^0.5.7",
@@ -27,9 +21,6 @@
     "@depay/web3-mock": "^11.10.1",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@open-wc/testing": "^3.1.5",
-    "@rollup/plugin-commonjs": "^22.0.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-replace": "^4.0.0",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
@@ -51,24 +42,18 @@
     "lit-analyzer": "^1.2.1",
     "lit-html": "^2.5.0",
     "nock": "^13.2.9",
-    "prettier": "^2.6.2",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.75.6",
-    "rollup-plugin-summary": "^1.4.3",
-    "rollup-plugin-terser": "^7.0.2"
+    "prettier": "^2.6.2"
   },
   "peerDependencies": {
     "ethers": "^5"
   },
   "dependencies": {
-    "ky": "^0.30.0",
-    "ky-universal": "^0.11.0",
-    "lit": "^2.2.5"
+    "lit": "^2.2.5",
+    "@me3/claim-sdk": "0.0.0"
   },
   "ava": {
     "require": [
-      "./tests/_setup-browser-env.js",
-      "ky-universal"
+      "./tests/_setup-browser-env.js"
     ]
   }
 }
