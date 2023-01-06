@@ -1,10 +1,11 @@
 import resolve from '@rollup/plugin-node-resolve'
 import common from '@rollup/plugin-commonjs'
+import { terser } from 'rollup-plugin-terser'
 
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/bundle.js',
+    dir: 'dist',
     format: 'esm'
   },
   plugins: [
@@ -13,5 +14,6 @@ export default {
       preferBuiltins: true
     }),
     common(),
+    terser({ output: { comments: false } })
   ]
 }

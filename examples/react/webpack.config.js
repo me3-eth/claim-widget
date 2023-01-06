@@ -47,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /@me3\/claim-sdk/],
         use: [loaders.babel],
       },
       {

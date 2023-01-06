@@ -3,12 +3,15 @@ import { css } from '@emotion/react';
 import { anything, mock } from '@depay/web3-mock'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { createComponent } from '@lit-labs/react'
 import readmePath from '../../README.md'
+import fullWidgetPath from '../../docs/full-widget.md'
+import miniWidgetPath from '../../docs/mini-widget.md'
 import registrarAbi from '../../../../tests/Registrar.json'
 import faker from 'storybook-addon-mock/dist/utils/faker.js'
 
-import WebComponent from '@clubajax/react-web-component'
-import '@me3/claim-widget'
+// import WebComponent from '@clubajax/react-web-component'
+import { ClaimWidget } from '@me3/claim-widget'
 
 mock({
   blockchain: 'ethereum',
@@ -75,7 +78,7 @@ const containerStyle = css`
   width: 100%;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: start;
   gap: 5%;
@@ -85,40 +88,106 @@ const containerStyle = css`
 const sectionStyle = css`
   font-size: 16px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 100%;
+`
+
+const introStyle = css`
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  width: 100%;
 `
 
 const codeStyle = css``
 
 const HomePage = () => {
   const [readmeSrc, setReadmeSrc] = useState('')
+  const [fullWidgetSrc, setFullWidgetSrc] = useState('')
+  const [miniWidgetSrc, setMiniWidgetSrc] = useState('')
 
   useEffect(() => {
     setReadmeSrc(readmePath)
+    setFullWidgetSrc(fullWidgetPath)
+    setMiniWidgetSrc(miniWidgetPath)
   }, [])
 
-  console.log({ supported: SyntaxHighlighter.supportedLanguages })
+  const Me3ClaimWidget = createComponent({
+    react: React,
+    tagName: 'me3-claim-widget',
+    elementClass: ClaimWidget
+  })
 
   return (
     <div css={containerStyle}>
+      <section css={introStyle}>
+        <div css={css`width: 80%`}>
+          <ReactMarkdown
+            children={readmeSrc}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match =  /language-(\w+)/.exec(className || '')
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    children={String(children).replace(/\n$/, '')}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  />
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                )
+              }
+            }}
+          />
+        </div>
+      </section>
+
       <section css={sectionStyle}>
         <div css={css`width: 430px`}>
           <h1>Full widget</h1>
-          <WebComponent
-            component="me3-claim-widget"
+          <Me3ClaimWidget
             domain="me3.eth"
             provider={window.ethereum}
             alchemyapi={{ key: 'abc123', env: 'mainnet' }}
             token-address="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
             />
         </div>
+        <div css={css`width: 700px`}>
+          <ReactMarkdown
+            children={fullWidgetSrc}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match =  /language-(\w+)/.exec(className || '')
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    children={String(children).replace(/\n$/, '')}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  />
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                )
+              }
+            }}
+          />
+        </div>
 
+      </section>
+
+      <section css={sectionStyle}>
         <div css={css`width: 430px`}>
           <h1>Mini widget</h1>
-          <WebComponent
-            component="me3-claim-widget"
+          <Me3ClaimWidget
             domain="me3.eth"
             provider={window.ethereum}
             alchemyapi={{ key: 'abc123', env: 'mainnet' }}
@@ -128,12 +197,10 @@ const HomePage = () => {
             hide-claim-btn="true"
             />
         </div>
-      </section>
 
-      <section css={sectionStyle}>
-        <div>
+        <div css={css`width: 700px`}>
           <ReactMarkdown
-            children={readmeSrc}
+            children={miniWidgetSrc}
             components={{
               code({ node, inline, className, children, ...props }) {
                 const match =  /language-(\w+)/.exec(className || '')
