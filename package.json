@@ -10,8 +10,9 @@
     "build": "npm run build:storybook",
     "build:storybook": "build-storybook -o ./dist",
     "serve": "wds --watch",
-    "storybook": "start-storybook -p 6006",
-    "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer"
+    "storybook": "start-storybook -p 6007 --no-open",
+    "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -48,8 +49,8 @@
     "ethers": "^5"
   },
   "dependencies": {
-    "lit": "^2.2.5",
-    "@me3/claim-sdk": "0.0.0"
+    "@me3/claim-sdk": "file:../claim-sdk",
+    "lit": "^2.2.5"
   },
   "ava": {
     "require": [
