@@ -16,6 +16,12 @@ pnpm i @me3/claim-widget
 yarn add @me3/claim-widget
 ```
 
+## Project setup
+
+1. Deploy `IAuthoriser` and `IRulesEngine` contract(s):
+  * We have a simple one for NFT projects available to deploy at https://github.com/me3-eth/protocol/README.md#nftauthoriser
+2. Register project with me3: https://goerli.etherscan.io/address/0x201C5AA9556fDf8D5f6cDa1C59735Dd7151EEcEf#writeContract
+
 ### Requirements
 
 * Credentials for Alchemy API to pull NFTs
@@ -31,10 +37,7 @@ The widget can be used in React, Vue, Svelte, HTML, or Angular as a Web Componen
 Check out the examples to see usage:
 
 * [React](/examples/react/README.md)
-* [Svelte](/examples/svelte/README.md)
-* [Svelte Kit](/examples/svelte-kit/README.md)
 * [Vue](/examples/vue/README.md)
-* [IIFE in Plain HTML](/examples/iife/README.md)
 
 You can also take a look at our [Storybook pages](https://me3-eth.github.io/claim-widget/)
 to see the widget working in our default me3 theme.

@@ -176,16 +176,14 @@ export class Input extends LitElement {
 
     clearTimeout(this._validationDelay)
 
-    const p = this.provider
-    const domain = this.domain
-
     if (!managedValue) {
       this._validationState = VALIDATION_STATE.ERROR
       return
     }
 
+    const p = this.provider
+    const domain = this.domain
     this._validationDelay = setTimeout(function () {
-
       this._validationState = VALIDATION_STATE.SEARCHING
 
       validate(domain, managedValue, { provider: p })
@@ -195,7 +193,7 @@ export class Input extends LitElement {
           else throw new Error('Invalid')
         })
         .catch(err => {
-          console.log({ err })
+          console.log({ message: 'Validation error', err })
           this._validationState = VALIDATION_STATE.ERROR
         })
     }.bind(this), 1000)
