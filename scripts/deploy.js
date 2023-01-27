@@ -9,8 +9,8 @@ import * as Name from 'w3name'
 
 dotenv.config()
 
-const { IPFS_NODE_AUTHORIZATION, IPNS_KEY, WEB3STORAGE_API_KEY } = process.env
-const PROJECT_NAME = 'me3.eth'
+const { WEB3STORAGE_API_KEY } = process.env
+const PROJECT_NAME = 'me3-claim-widget'
 
 async function main (commit, buildPath) {
   const files = await getFilesFromPath(resolve(buildPath))
@@ -24,8 +24,6 @@ async function main (commit, buildPath) {
     wrapWithDirectory: false
   })
   console.log(`Application CID is ${cid}`)
-
-  if (!IPNS_KEY) return null
 
   const key = await readFile('.w3name.private.key')
   const ipns = await Name.from(key)

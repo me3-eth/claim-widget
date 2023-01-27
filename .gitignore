@@ -28,3 +28,4 @@ examples/dist
 .nyc_output
 
 .env
+.w3name.private.key
