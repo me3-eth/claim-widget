@@ -10,9 +10,9 @@
     "build": "npm run build:storybook",
     "build:storybook": "build-storybook -s assets -o ./dist",
     "serve": "wds --watch",
-    "storybook": "start-storybook -p 6007 -s assets --no-open",
+    "storybook": "start-storybook -p 6007 --no-open",
     "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer",
-    "build-storybook": "build-storybook"
+    "analyze": "cem analyze --litelement --globs \"**/*.js\" --exclude examples --exclude stories --exclude assets --exclude src/stories --exclude scripts"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -47,7 +47,7 @@
     "prettier": "^2.6.2"
   },
   "dependencies": {
-    "@me3/claim-sdk": "file:../claim-sdk",
+    "@me3/claim-sdk": "^0.1.0",
     "ethers": "^5.7.2",
     "lit": "^2.2.5"
   },

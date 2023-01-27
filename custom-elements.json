@@ -1,0 +1,1253 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/claim-button.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ClaimButton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "disable"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disable",
+              "fieldName": "disable"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-claim-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ClaimButton",
+          "declaration": {
+            "name": "ClaimButton",
+            "module": "src/claim-button.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-claim-button",
+          "declaration": {
+            "name": "ClaimButton",
+            "module": "src/claim-button.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/header.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Header",
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "privacy": "public",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "privacy": "public",
+              "attribute": "description"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "fieldName": "title"
+            },
+            {
+              "name": "description",
+              "fieldName": "description"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-header",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Header",
+          "declaration": {
+            "name": "Header",
+            "module": "src/header.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-header",
+          "declaration": {
+            "name": "Header",
+            "module": "src/header.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./me3-claim-widget.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "@me3/claim-sdk"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/input.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Input",
+          "members": [
+            {
+              "kind": "method",
+              "name": "_showStateIcon",
+              "parameters": [
+                {
+                  "name": "currentState"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_subdomainUpdate",
+              "parameters": [
+                {
+                  "name": "ev"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_sendUpdate",
+              "parameters": [
+                {
+                  "name": "value"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "provider",
+              "type": {
+                "text": "null"
+              },
+              "default": "null",
+              "privacy": "public",
+              "attribute": "provider"
+            },
+            {
+              "kind": "field",
+              "name": "disable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "disable"
+            },
+            {
+              "kind": "field",
+              "name": "_inputRef",
+              "privacy": "public",
+              "attribute": "_inputRef"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "privacy": "public",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "privacy": "public",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "domain",
+              "privacy": "public",
+              "attribute": "domain"
+            },
+            {
+              "kind": "field",
+              "name": "_validationDelay",
+              "privacy": "public",
+              "attribute": "_validationDelay"
+            },
+            {
+              "kind": "field",
+              "name": "_validationState",
+              "privacy": "public",
+              "attribute": "_validationState"
+            }
+          ],
+          "events": [
+            {
+              "name": "subdomainupdate",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label"
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "value",
+              "fieldName": "value"
+            },
+            {
+              "name": "domain",
+              "fieldName": "domain"
+            },
+            {
+              "name": "provider",
+              "fieldName": "provider"
+            },
+            {
+              "name": "disable",
+              "fieldName": "disable"
+            },
+            {
+              "name": "_validationDelay",
+              "fieldName": "_validationDelay"
+            },
+            {
+              "name": "_inputRef",
+              "fieldName": "_inputRef"
+            },
+            {
+              "name": "_validationState",
+              "fieldName": "_validationState"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Input",
+          "declaration": {
+            "name": "Input",
+            "module": "src/input.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-input",
+          "declaration": {
+            "name": "Input",
+            "module": "src/input.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/me3-claim-widget.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ClaimWidget",
+          "members": [
+            {
+              "kind": "method",
+              "name": "handleClaim"
+            },
+            {
+              "kind": "method",
+              "name": "handleSelectedToken",
+              "parameters": [
+                {
+                  "name": "{ detail }"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleSubdomainUpdate",
+              "parameters": [
+                {
+                  "name": "{ detail }"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_tokensMemo"
+            },
+            {
+              "kind": "method",
+              "name": "_updateFormValidity"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Register Your Subdomain'",
+              "privacy": "public",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "default": "`Choose your subdomain for ${this.domain} and assign it to one of your NFTs. You'll also get a profile.`",
+              "privacy": "public",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "claimButtonText",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Register'",
+              "privacy": "public",
+              "attribute": "claimButtonText"
+            },
+            {
+              "kind": "field",
+              "name": "nameLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Subdomain'",
+              "privacy": "public",
+              "attribute": "nameLabel"
+            },
+            {
+              "kind": "field",
+              "name": "tokenLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'NFT'",
+              "privacy": "public",
+              "attribute": "tokenLabel"
+            },
+            {
+              "kind": "field",
+              "name": "namePlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'brendan'",
+              "privacy": "public",
+              "attribute": "namePlaceholder"
+            },
+            {
+              "kind": "field",
+              "name": "hideDescription",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "hide-description",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hideClaimButton",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "hide-claim-btn",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hideTokenSelector",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "hide-token-selector",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "alchemyapi",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}",
+              "privacy": "public",
+              "attribute": "alchemy-api",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tokens",
+              "privacy": "public",
+              "attribute": "tokens"
+            },
+            {
+              "kind": "field",
+              "name": "tokenContractAddress",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "privacy": "public",
+              "attribute": "token-address",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "formValid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "formValid"
+            },
+            {
+              "kind": "field",
+              "name": "provider",
+              "type": {
+                "text": "null"
+              },
+              "default": "null",
+              "privacy": "public",
+              "attribute": "provider"
+            },
+            {
+              "kind": "field",
+              "name": "signer",
+              "type": {
+                "text": "null"
+              },
+              "default": "null",
+              "privacy": "public",
+              "attribute": "signer"
+            },
+            {
+              "kind": "field",
+              "name": "minting",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "minting"
+            },
+            {
+              "kind": "field",
+              "name": "domain",
+              "privacy": "public",
+              "attribute": "domain"
+            },
+            {
+              "kind": "field",
+              "name": "selectedToken",
+              "privacy": "public",
+              "attribute": "selectedToken"
+            },
+            {
+              "kind": "field",
+              "name": "chosenSubdomain",
+              "privacy": "public",
+              "attribute": "chosenSubdomain"
+            }
+          ],
+          "events": [
+            {
+              "name": "subdomainupdate",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "fieldName": "title"
+            },
+            {
+              "name": "description",
+              "fieldName": "description"
+            },
+            {
+              "name": "claimButtonText",
+              "fieldName": "claimButtonText"
+            },
+            {
+              "name": "nameLabel",
+              "fieldName": "nameLabel"
+            },
+            {
+              "name": "tokenLabel",
+              "fieldName": "tokenLabel"
+            },
+            {
+              "name": "namePlaceholder",
+              "fieldName": "namePlaceholder"
+            },
+            {
+              "name": "domain",
+              "fieldName": "domain"
+            },
+            {
+              "name": "alchemy-api",
+              "fieldName": "alchemyapi"
+            },
+            {
+              "name": "provider",
+              "fieldName": "provider"
+            },
+            {
+              "name": "token-address",
+              "fieldName": "tokenContractAddress"
+            },
+            {
+              "name": "hide-token-selector",
+              "fieldName": "hideTokenSelector"
+            },
+            {
+              "name": "hide-description",
+              "fieldName": "hideDescription"
+            },
+            {
+              "name": "hide-claim-btn",
+              "fieldName": "hideClaimButton"
+            },
+            {
+              "name": "tokens",
+              "fieldName": "tokens"
+            },
+            {
+              "name": "selectedToken",
+              "fieldName": "selectedToken"
+            },
+            {
+              "name": "chosenSubdomain",
+              "fieldName": "chosenSubdomain"
+            },
+            {
+              "name": "formValid",
+              "fieldName": "formValid"
+            },
+            {
+              "name": "signer",
+              "fieldName": "signer"
+            },
+            {
+              "name": "minting",
+              "fieldName": "minting"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-claim-widget",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ClaimWidget",
+          "declaration": {
+            "name": "ClaimWidget",
+            "module": "src/me3-claim-widget.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-claim-widget",
+          "declaration": {
+            "name": "ClaimWidget",
+            "module": "src/me3-claim-widget.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/token-selector.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TokenSelector",
+          "members": [
+            {
+              "kind": "method",
+              "name": "setSelectedToken",
+              "parameters": [
+                {
+                  "name": "tokenId"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "item",
+              "parameters": [
+                {
+                  "name": "{ title, media, id: { tokenId } }"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "tokens",
+              "type": {
+                "text": "null"
+              },
+              "default": "null",
+              "privacy": "public",
+              "attribute": "tokens"
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}",
+              "privacy": "public",
+              "attribute": "options"
+            },
+            {
+              "kind": "field",
+              "name": "disable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "disable"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "privacy": "public",
+              "attribute": "selected"
+            }
+          ],
+          "events": [
+            {
+              "name": "tokenselected",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "tokens",
+              "fieldName": "tokens"
+            },
+            {
+              "name": "options",
+              "fieldName": "options"
+            },
+            {
+              "name": "disable",
+              "fieldName": "disable"
+            },
+            {
+              "name": "selected",
+              "fieldName": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-token-selector",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TokenSelector",
+          "declaration": {
+            "name": "TokenSelector",
+            "module": "src/token-selector.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-token-selector",
+          "declaration": {
+            "name": "TokenSelector",
+            "module": "src/token-selector.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "tests/_setup-browser-env.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/icons/error.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ErrorIcon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'24'",
+              "privacy": "public",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "'24'",
+              "privacy": "public",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "bgColor",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#ff5e75'",
+              "privacy": "public",
+              "attribute": "bgColor"
+            },
+            {
+              "kind": "field",
+              "name": "fgColor",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#ffffff'",
+              "privacy": "public",
+              "attribute": "fgColor"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "fieldName": "height"
+            },
+            {
+              "name": "bgColor",
+              "fieldName": "bgColor"
+            },
+            {
+              "name": "fgColor",
+              "fieldName": "fgColor"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-error-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ErrorIcon",
+          "declaration": {
+            "name": "ErrorIcon",
+            "module": "src/icons/error.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-error-icon",
+          "declaration": {
+            "name": "ErrorIcon",
+            "module": "src/icons/error.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/icons/loading.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LoadingIcon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'32'",
+              "privacy": "public",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "'32'",
+              "privacy": "public",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#D3D3D9'",
+              "privacy": "public",
+              "attribute": "color"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "fieldName": "height"
+            },
+            {
+              "name": "color",
+              "fieldName": "color"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-loading-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LoadingIcon",
+          "declaration": {
+            "name": "LoadingIcon",
+            "module": "src/icons/loading.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-loading-icon",
+          "declaration": {
+            "name": "LoadingIcon",
+            "module": "src/icons/loading.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/icons/valid.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ValidIcon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'24'",
+              "privacy": "public",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "'24'",
+              "privacy": "public",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "bgColor",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#3de08f'",
+              "privacy": "public",
+              "attribute": "bgColor"
+            },
+            {
+              "kind": "field",
+              "name": "fgColor",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#ffffff'",
+              "privacy": "public",
+              "attribute": "fgColor"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "fieldName": "height"
+            },
+            {
+              "name": "bgColor",
+              "fieldName": "bgColor"
+            },
+            {
+              "name": "fgColor",
+              "fieldName": "fgColor"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "me3-valid-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ValidIcon",
+          "declaration": {
+            "name": "ValidIcon",
+            "module": "src/icons/valid.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "me3-valid-icon",
+          "declaration": {
+            "name": "ValidIcon",
+            "module": "src/icons/valid.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/Button.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "Button",
+          "parameters": [
+            {
+              "name": "{ primary, backgroundColor = null, size, label, onClick }"
+            }
+          ],
+          "description": "Primary UI component for user interaction"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/stories/Button.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/Button.stories.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Primary"
+        },
+        {
+          "kind": "variable",
+          "name": "Secondary"
+        },
+        {
+          "kind": "variable",
+          "name": "Large"
+        },
+        {
+          "kind": "variable",
+          "name": "Small"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/stories/Button.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Primary",
+          "declaration": {
+            "name": "Primary",
+            "module": "src/stories/Button.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Secondary",
+          "declaration": {
+            "name": "Secondary",
+            "module": "src/stories/Button.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Large",
+          "declaration": {
+            "name": "Large",
+            "module": "src/stories/Button.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Small",
+          "declaration": {
+            "name": "Small",
+            "module": "src/stories/Button.stories.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/Header.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "Header",
+          "parameters": [
+            {
+              "name": "{ user, onLogin, onLogout, onCreateAccount }"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Header",
+          "declaration": {
+            "name": "Header",
+            "module": "src/stories/Header.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/Header.stories.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "LoggedIn"
+        },
+        {
+          "kind": "variable",
+          "name": "LoggedOut"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/stories/Header.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LoggedIn",
+          "declaration": {
+            "name": "LoggedIn",
+            "module": "src/stories/Header.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LoggedOut",
+          "declaration": {
+            "name": "LoggedOut",
+            "module": "src/stories/Header.stories.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/Page.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "Page",
+          "parameters": [
+            {
+              "name": "{ user, onLogin, onLogout, onCreateAccount }"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Page",
+          "declaration": {
+            "name": "Page",
+            "module": "src/stories/Page.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/Page.stories.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "LoggedIn"
+        },
+        {
+          "kind": "variable",
+          "name": "LoggedOut"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/stories/Page.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LoggedIn",
+          "declaration": {
+            "name": "LoggedIn",
+            "module": "src/stories/Page.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LoggedOut",
+          "declaration": {
+            "name": "LoggedOut",
+            "module": "src/stories/Page.stories.js"
+          }
+        }
+      ]
+    }
+  ]
+}
