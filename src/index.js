@@ -1,2 +1,2 @@
-export { claim, nftApi } from './lib/protocol.js'
 export * from './me3-claim-widget.js'
+export * from '@me3/claim-sdk'

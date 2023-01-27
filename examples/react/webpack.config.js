@@ -47,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /@me3\/claim-sdk/],
         use: [loaders.babel],
       },
       {
@@ -100,7 +100,7 @@ module.exports = {
     ],
   },
   output: {
-    path: resolve(__dirname, 'dist'),
+    path: resolve(__dirname, '..', 'dist', 'react'),
     filename: 'static/js/[name].[contenthash:8].js',
     chunkFilename: 'static/js/[name].[id].[contenthash:8].chunk.js',
   },

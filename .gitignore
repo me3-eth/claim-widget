@@ -13,6 +13,8 @@ dist
 dist-ssr
 *.local
 
+examples/dist
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -26,3 +28,4 @@ dist-ssr
 .nyc_output
 
 .env
+.w3name.private.key

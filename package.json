@@ -3,59 +3,60 @@
   "version": "0.4.3",
   "customElements": "custom-elements.json",
   "main": "src/index.js",
-  "module": "dist/bundle.js",
+  "module": "src/index.js",
   "type": "module",
-  "files": [
-    "src",
-    "dist",
-    "package.json"
-  ],
   "scripts": {
     "dev": "npm run storybook",
-    "build": "npm run build:dist && npm run build:storybook",
-    "build:dist": "node ./scripts/build.cjs",
-    "build:storybook": "build-storybook -o ./dist",
-    "bundle": "rollup -c",
-    "preview": "vite preview",
+    "build": "npm run build:storybook",
+    "build:storybook": "build-storybook -s assets -o ./dist",
     "serve": "wds --watch",
-    "storybook": "start-storybook -p 6006",
-    "test": "ava",
-    "test:watch": "ava --watch"
+    "storybook": "start-storybook -p 6007 --no-open",
+    "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer",
+    "analyze": "cem analyze --litelement --globs \"**/*.js\" --exclude examples --exclude stories --exclude assets --exclude src/stories --exclude scripts"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.1",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
+    "@babel/core": "^7.20.5",
     "@babel/eslint-parser": "^7.17.0",
     "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@depay/web3-blockchains": "^6.3.2",
     "@depay/web3-mock": "^11.10.1",
+    "@esm-bundle/chai": "^4.3.4-fix.0",
     "@open-wc/testing": "^3.1.5",
-    "@rollup/plugin-commonjs": "^22.0.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-replace": "^4.0.0",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-webpack4": "^6.5.15",
+    "@storybook/manager-webpack4": "^6.5.15",
+    "@storybook/web-components": "^6.5.15",
     "@web/dev-server": "^0.1.31",
     "@web/dev-server-legacy": "^1.0.0",
-    "@web/test-runner": "^0.13.27",
+    "@web/test-runner": "^0.13.31",
+    "@web/test-runner-commands": "^0.6.5",
     "@web/test-runner-playwright": "^0.8.8",
+    "@web/test-runner-puppeteer": "^0.11.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
+    "ava": "^5.1.0",
+    "babel-loader": "^8.3.0",
+    "browser-env": "^3.3.0",
     "eslint": "^8.15.0",
     "lit-analyzer": "^1.2.1",
-    "prettier": "^2.6.2",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.75.6",
-    "rollup-plugin-summary": "^1.4.3",
-    "rollup-plugin-terser": "^7.0.2"
-  },
-  "peerDependencies": {
-    "ethers": "^5.6.8"
+    "lit-html": "^2.5.0",
+    "msw": "^0.49.2",
+    "msw-storybook-addon": "^1.6.3",
+    "nock": "^13.2.9",
+    "prettier": "^2.6.2"
   },
   "dependencies": {
-    "ky": "^0.30.0",
+    "@me3/claim-sdk": "^0.1.0",
+    "ethers": "^5.7.2",
     "lit": "^2.2.5"
   },
   "ava": {
     "require": [
-      "./tests/_setup-browser-env.js",
-      "ky-universal"
+      "./tests/_setup-browser-env.js"
     ]
+  },
+  "msw": {
+    "workerDirectory": "assets"
   }
 }

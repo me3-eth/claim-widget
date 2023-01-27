@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit'
 import { ethers } from 'ethers'
 
-import { claim, nftApi } from './lib/protocol.js'
+import { claim, nfts } from '@me3/claim-sdk'
 import './header.js'
 import './input.js'
 import './token-selector.js'
@@ -184,7 +184,7 @@ export class ClaimWidget extends LitElement {
 
         if (this.alchemyapi.key && this.alchemyapi.env && this.tokenContractAddress) {
           this.tokens = signer.getAddress()
-            .then(walletAddr => nftApi(this.tokenContractAddress, walletAddr, { alchemyApi: this.alchemyapi }))
+            .then(walletAddr => nfts(this.tokenContractAddress, walletAddr, { alchemyApi: this.alchemyapi }))
         } else {
           this.tokens = Promise.resolve([])
         }
