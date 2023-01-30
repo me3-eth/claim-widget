@@ -1,0 +1,11 @@
+examples/
+scripts/
+src/stories/
+stories/
+tests/
+assets/
+.storybook/
+.vscode/
+
+.env
+.w3name.private.key
