@@ -93,7 +93,6 @@ export class ClaimWidget extends LitElement {
     this.minting = true
 
     claim(this.domain, this.chosenSubdomain, { provider: this.provider })
-      .then(tx => tx.wait())
       .then(result => console.log({ claimResult: result }))
       .catch(err => console.log({ claimErr: err }))
       .finally((function () {
@@ -179,9 +178,9 @@ export class ClaimWidget extends LitElement {
         if (tokens.length > 0 || this.hideTokenSelector) return
 
         if (!this.provider) throw new Error('Missing provider attribute')
+        if (!ethers.providers.Provider.isProvider(this.provider)) throw new Error('Must provide an EIP-1193, EIP-1102, EIP-3085 and EIP-3326 compliant provider')
 
-        const p = new ethers.providers.Web3Provider(this.provider)
-        const signer = p.getSigner()
+        const signer = this.provider.getSigner()
 
         if (this.alchemyapi.key && this.alchemyapi.env && this.tokenContractAddress) {
           this.tokens = signer.getAddress()

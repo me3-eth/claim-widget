@@ -12,6 +12,7 @@
     "serve": "wds --watch",
     "storybook": "start-storybook -p 6007 --no-open",
     "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer",
+    "deploy": "scripts/deploy.js \"$(git rev-parse --short HEAD)$(git diff --quiet || echo '-dirty')\"",
     "analyze": "cem analyze --litelement --globs \"**/*.js\" --exclude examples --exclude stories --exclude assets --exclude src/stories --exclude scripts"
   },
   "devDependencies": {
@@ -39,12 +40,15 @@
     "babel-loader": "^8.3.0",
     "browser-env": "^3.3.0",
     "eslint": "^8.15.0",
+    "keccak256": "^1.0.6",
     "lit-analyzer": "^1.2.1",
     "lit-html": "^2.5.0",
     "msw": "^0.49.2",
     "msw-storybook-addon": "^1.6.3",
     "nock": "^13.2.9",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "w3name": "^1.0.7",
+    "web3.storage": "^4.4.0"
   },
   "dependencies": {
     "@me3/claim-sdk": "^0.1.0",
