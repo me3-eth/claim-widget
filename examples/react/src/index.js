@@ -7,7 +7,11 @@ import 'normalize.css';
 import App from './App';
 
 const { worker } = require('./mocks/browser')
-worker.start()
+worker.start({
+  serviceWorker: {
+    url: 'mockServiceWorker.js'
+  }
+})
 
 ReactDOM.render(
   <HashRouter>

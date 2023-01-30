@@ -123,6 +123,7 @@ export class ClaimWidget extends LitElement {
 
     return html`
     <div id="container">
+      <img height="47" width="47" alt="me3 logo" src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 40 40'%3e%3cpath fill='url(%23a)' fill-rule='evenodd' d='M0 28a16 16 0 0 0 3 5l6-3c3-2 5-5 5-8v-8a3 3 0 0 1 1-2h3l5 3 4-6-5-3-5-1-5 1c-3 2-4 5-4 8l-1 8a3 3 0 0 1-1 2l-6 4zm39-15-5 3-2 2v8c0 3-2 6-5 8s-6 1-9 0l-5-3a12 12 0 0 0 3-6l5 3h3l1-1 1-1v-8c0-3 2-6 5-8l6-3a16 16 0 0 1 2 6z' clip-rule='evenodd'/%3e%3cdefs%3e%3clinearGradient id='a' x1='44.3' x2='-15.2' y1='-25.8' y2='-6.9' gradientUnits='userSpaceOnUse'%3e%3cstop stop-color='%233D73FF'/%3e%3cstop offset='.4' stop-color='%2379AEFF'/%3e%3cstop offset='.7' stop-color='%23918EFF'/%3e%3cstop offset='1' stop-color='%23577AFF'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e" />
       ${ this.hideDescription
         ? ''
         : html`<me3-header title=${this.title} description=${this.description} />`

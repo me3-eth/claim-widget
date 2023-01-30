@@ -4,12 +4,16 @@ import { anything, mock } from '@depay/web3-mock'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { createComponent } from '@lit-labs/react'
+import { ethers } from 'ethers'
 import readmePath from '../../README.md'
 import fullWidgetPath from '../../docs/full-widget.md'
 import miniWidgetPath from '../../docs/mini-widget.md'
 import registrarAbi from '../../../../tests/Registrar.json'
 
 import { ClaimWidget } from '@me3/claim-widget'
+
+function fakeMint () {
+}
 
 // Mock blockchain requests
 mock({
@@ -29,6 +33,7 @@ mock({
   },
   accounts: { return: ['0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc'] }
 })
+
 
 const containerStyle = css`
   width: 100%;
@@ -78,6 +83,8 @@ const HomePage = () => {
     elementClass: ClaimWidget
   })
 
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+
   return (
     <div css={containerStyle}>
       <section css={introStyle}>
@@ -110,7 +117,7 @@ const HomePage = () => {
           <h1>Full widget</h1>
           <Me3ClaimWidget
             domain="me3.eth"
-            provider={window.ethereum}
+            provider={provider}
             alchemyapi={{ key: 'abc123', env: 'mainnet' }}
             token-address="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
             />
@@ -152,6 +159,7 @@ const HomePage = () => {
             hide-description="true"
             hide-claim-btn="true"
             />
+          <button onClick={fakeMint}>Mint</button>
         </div>
 
         <div css={css`width: 700px`}>
