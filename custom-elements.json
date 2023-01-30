@@ -757,12 +757,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "tests/_setup-browser-env.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/icons/error.js",
       "declarations": [
         {

@@ -13,7 +13,7 @@
     "storybook": "start-storybook -p 6007 --no-open",
     "test": "web-test-runner \"tests/**/*.test.js\" --node-resolve --puppeteer",
     "deploy": "scripts/deploy.js \"$(git rev-parse --short HEAD)$(git diff --quiet || echo '-dirty')\"",
-    "analyze": "cem analyze --litelement --globs \"**/*.js\" --exclude examples --exclude stories --exclude assets --exclude src/stories --exclude scripts"
+    "analyze": "cem analyze --litelement --globs \"src/**/*.js\" --exclude examples --exclude stories --exclude assets --exclude src/stories --exclude scripts"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
