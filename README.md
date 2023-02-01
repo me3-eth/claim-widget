@@ -2,6 +2,8 @@
 
 Embeddable widget for claiming subdomains through the me3 subdomain registrar contracts.
 
+![Claim widget stages](claimwidget.png)
+
 ## Installation
 
 Use your favourite package manager:
@@ -18,18 +20,12 @@ yarn add @me3/claim-widget
 
 ## Project setup
 
+Before the claim widget can be used, your project needs to be registered with me3.
+
 1. Deploy `IAuthoriser` and `IRulesEngine` contract(s):
-  * We have a simple one for NFT projects available to deploy at https://github.com/me3-eth/protocol/README.md#nftauthoriser
-2. Register project with me3: https://goerli.etherscan.io/address/0x201C5AA9556fDf8D5f6cDa1C59735Dd7151EEcEf#writeContract
-
-### Requirements
-
-* Credentials for Alchemy API to pull NFTs
-* A provider object that supports the following EIPs:
-  * 1193
-  * 1102
-  * 3085
-  * 3326
+  * We have a simple one for NFT projects available to deploy at https://github.com/me3-eth/subdomain-registrar/README.md#nftauthoriser
+2. Register project with me3: https://etherscan.io/address/0x809f89b26347156ff3f8f2842780ddafb1c4acde#writeContract
+3. Set the me3 Subdomain Registrar as the controller for the project's ENS name
 
 ## Usage
 
@@ -39,11 +35,14 @@ Check out the examples to see usage:
 * [React](/examples/react/README.md)
 * [Vue](/examples/vue/README.md)
 
-You can also take a look at our [Storybook pages](https://me3-eth.github.io/claim-widget/)
-to see the widget working in our default me3 theme.
+### Requirements
 
-### Options
-
+* Credentials for Alchemy API to pull NFTs
+* A provider object that supports the following EIPs:
+  * 1193
+  * 1102
+  * 3085
+  * 3326
 
 ## Styles
 
@@ -86,10 +85,6 @@ The claim-widget is themable. These are the default values:
 1. Clone
 2. install pkgs
 3. ???
-
-### Storybook
-
-npm run storybook
 
 ### Add new example
 

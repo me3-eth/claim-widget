@@ -59,7 +59,7 @@ export class ClaimWidget extends LitElement {
     super();
 
     this.title = 'Register Your Subdomain'
-    this.description = `Choose your subdomain for ${this.domain} and assign it to one of your NFTs. You'll also get a profile.`
+    this.description = ''
     this.claimButtonText = 'Register'
     this.nameLabel = 'Subdomain'
     this.tokenLabel = 'NFT'
@@ -119,6 +119,10 @@ export class ClaimWidget extends LitElement {
 
   render() {
     this._tokensMemo.call(this)
+
+    if (!this.description) {
+      this.description = `Choose your subdomain for ${this.domain} and assign it to one of your NFTs. You'll also get a profile.`
+    }
 
     return html`
     <div id="container">

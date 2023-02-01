@@ -19,13 +19,13 @@ function fakeMint () {
 mock({
   blockchain: 'ethereum',
   transaction: {
-    to: '0x9f2daf90c4323b529c31a40520a5fa63eb601b84',
+    to: '0x8E424e5B34C676E5BE793d82E3fAA75B26693264',
     api: registrarAbi.abi,
     method: 'register',
     params: ['0x868437061435f35898f8ed7fb95d62ca53b460f0bb9d1c6be3bfd796e38d8636', anything, '0xb25205ca60f964d45b30e969dc3f10a5de4ec3bc', []]
   },
   call: {
-    to: '0x9f2daf90c4323b529c31a40520a5fa63eb601b84',
+    to: '0x8E424e5B34C676E5BE793d82E3fAA75B26693264',
     api: registrarAbi.abi,
     method: 'valid',
     params: ['0x868437061435f35898f8ed7fb95d62ca53b460f0bb9d1c6be3bfd796e38d8636', anything],
