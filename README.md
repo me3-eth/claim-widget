@@ -33,7 +33,6 @@ The widget can be used in React, Vue, Svelte, HTML, or Angular as a Web Componen
 Check out the examples to see usage:
 
 * [React](/examples/react/README.md)
-* [Vue](/examples/vue/README.md)
 
 ### Requirements
 
