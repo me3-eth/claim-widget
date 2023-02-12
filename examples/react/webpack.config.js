@@ -4,6 +4,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -87,6 +88,11 @@ module.exports = {
         ]
       : []),
     new NodePolyfillPlugin(),
+    new CopyPlugin({
+      patterns: [
+        './public/mockServiceWorker.js'
+      ]
+    })
   ],
   optimization: {
     minimize: prod,

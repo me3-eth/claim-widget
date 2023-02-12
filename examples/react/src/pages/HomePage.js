@@ -9,6 +9,7 @@ import readmePath from '../../README.md'
 import fullWidgetPath from '../../docs/full-widget.md'
 import miniWidgetPath from '../../docs/mini-widget.md'
 import registrarAbi from '../../../../tests/Registrar.json'
+import Me3Logo from '../../public/logo.svg'
 
 import { ClaimWidget } from '@me3/claim-widget'
 
@@ -44,15 +45,31 @@ const containerStyle = css`
   align-items: start;
   gap: 5%;
   padding: 5%;
+  @media (min-width:801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
+    padding: 1%;
+  }
 `
 
 const sectionStyle = css`
   font-size: 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
   width: 100%;
+  @media (min-width:801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
+    flex-direction: row;
+  }
+`
+
+const demoColStyle = css`
+  width: 100%;
+  max-width: 430px;
+`
+
+const descColStyle = css`
+  width: 100%;
+  max-width: 700px;
 `
 
 const introStyle = css`
@@ -62,6 +79,11 @@ const introStyle = css`
   align-items: center;
   justify-content: center;
   width: 100%;
+`
+
+const logoStyle = css`
+  display: block;
+  margin: 0 auto;
 `
 
 const codeStyle = css``
@@ -87,8 +109,9 @@ const HomePage = () => {
 
   return (
     <div css={containerStyle}>
+      <img css={logoStyle} src={Me3Logo} alt="Symbolic representation of a chain link, the logo for me3" />
       <section css={introStyle}>
-        <div css={css`width: 80%`}>
+        <div css={css`width: 100%; @media (min-width:801px) { width: 80%; }`}>
           <ReactMarkdown
             children={readmeSrc}
             components={{
@@ -113,7 +136,7 @@ const HomePage = () => {
       </section>
 
       <section css={sectionStyle}>
-        <div css={css`width: 430px`}>
+        <div css={demoColStyle}>
           <h1>Full widget</h1>
           <Me3ClaimWidget
             domain="me3.eth"
@@ -122,7 +145,7 @@ const HomePage = () => {
             token-address="0x9759226B2F8ddEFF81583e244Ef3bd13AAA7e4A1"
             />
         </div>
-        <div css={css`width: 700px`}>
+        <div css={descColStyle}>
           <ReactMarkdown
             children={fullWidgetSrc}
             components={{
@@ -148,7 +171,7 @@ const HomePage = () => {
       </section>
 
       <section css={sectionStyle}>
-        <div css={css`width: 430px`}>
+        <div css={demoColStyle}>
           <h1>Mini widget</h1>
           <Me3ClaimWidget
             domain="me3.eth"
@@ -159,10 +182,9 @@ const HomePage = () => {
             hide-description="true"
             hide-claim-btn="true"
             />
-          <button onClick={fakeMint}>Mint</button>
         </div>
 
-        <div css={css`width: 700px`}>
+        <div css={descColStyle}>
           <ReactMarkdown
             children={miniWidgetSrc}
             components={{
